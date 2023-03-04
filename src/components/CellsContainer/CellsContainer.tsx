@@ -43,11 +43,7 @@ const Cells = ({
   const [can_draw, setCanDraw] = useState(false);
   const dispatch = useDispatch();
 
-  const handlePointerMove = (event: PointerEvent) => {
-    console.log(event);
-  };
-
-  const handleClick = useCallback(function (this: {
+  const handlePointerEvent = useCallback(function (this: {
     cells: Array<null | string>;
     index: number;
     is_player_x: boolean;
@@ -95,18 +91,17 @@ const Cells = ({
       onPointerDown={() => setCanDraw(true)}
       onPointerUp={() => setCanDraw(false)}
       onPointerLeave={() => setCanDraw(false)}
-      onPointerMove={can_draw ? handlePointerMove : undefined}
     >
       {cells.map((cell, index) => {
+        const context = { cells, index, is_player_x };
         return (
           <div
             className={setClassName(winning_moves, cell, index)}
             key={index.toString()}
-            onClick={
-              !cell
-                ? handleClick.bind({ cells, index, is_player_x })
-                : undefined
+            onPointerMove={
+              can_draw && !cell ? handlePointerEvent.bind(context) : undefined
             }
+            onClick={!cell ? handlePointerEvent.bind(context) : undefined}
           >
             {cell}
           </div>
