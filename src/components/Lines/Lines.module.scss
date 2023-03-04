@@ -1,0 +1,40 @@
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  pointer-events: none;
+
+  &.horizontal {
+    flex-direction: column;
+  }
+
+  &>div {
+    flex: 0 0 1px;
+    background-color: var(--main-color);
+    animation: draw_line 0.5s ease-in-out forwards;
+  }
+
+  &.vertical:not(.no-animation) {
+    &>div {
+      transform-origin: center center;
+      transform: scale(1, 0);
+    }
+  }
+
+  &.horizontal:not(.no-animation) {
+    &>div {
+      transform-origin: center center;
+      transform: scale(0, 1);
+    }
+  }
+}
+
+@keyframes draw_line {
+  to {
+    transform: scale(1, 1);
+  }
+}

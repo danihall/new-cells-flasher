@@ -1,0 +1,34 @@
+:root {
+  --main-color: rgb(167, 167, 167);
+  --margin-top: 1.5rem;
+  --countdown-time: 5s;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.margin-top {
+  margin-top: var(--margin-top);
+}

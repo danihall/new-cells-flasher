@@ -1,0 +1,32 @@
+.cells {
+  display: grid;
+  grid-template-columns: repeat(var(--cells-per-row), 1fr);
+
+  &>div {
+    aspect-ratio: 1/1;
+    font-size: 0;
+    user-select: none;
+
+    &.player-x {
+      background-color: rgb(255, 215, 15);
+    }
+
+    &.player-o {
+      background-color: rgb(94, 74, 223);
+    }
+
+    &.is--winner-move {
+      animation: flash 0.8s ease-in infinite;
+    }
+  }
+}
+
+@keyframes flash {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.2;
+  }
+}
