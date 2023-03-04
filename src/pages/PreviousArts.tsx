@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import ArtsRegister from "../components/ArtsRegister/ArtsRegister";
+import RegisteredArts from "../components/RegisteredArts/RegisteredArts";
 import { IArt } from "../helpers/artStorage";
 
 const PreviousArts = (): JSX.Element => {
@@ -10,7 +10,7 @@ const PreviousArts = (): JSX.Element => {
     <>
       <h1>previous game</h1>
       {storedArts && storedArts.length ? (
-        <ArtsRegister storedArts={storedArts} />
+        <RegisteredArts storedArts={storedArts} />
       ) : (
         <p>There are no stored Arts!</p>
       )}

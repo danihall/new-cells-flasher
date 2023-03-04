@@ -1,15 +1,20 @@
 import { IArt } from "../../helpers/artStorage";
+import {
+  formatDate,
+  readable_format,
+  datetime_format,
+} from "../../helpers/formatDate";
 import ArtMainLayout from "../ArtMainLayout/ArtMainLayout";
 import { Cells } from "../CellsContainer/CellsContainer";
 import Lines from "../Lines/Lines";
 
-import css from "./ArtsRegister.module.scss";
+import css from "./RegisteredArts.module.scss";
 
-interface IArtsRegisterProps {
+interface IRegisteredArtsProps {
   storedArts: Array<IArt>;
 }
 
-const ArtsRegister = ({ storedArts }: IArtsRegisterProps): JSX.Element => {
+const RegisteredArts = ({ storedArts }: IRegisteredArtsProps): JSX.Element => {
   return (
     <>
       {storedArts.map((art) => {
@@ -19,6 +24,10 @@ const ArtsRegister = ({ storedArts }: IArtsRegisterProps): JSX.Element => {
         return (
           <div className={css["stored-art"]} key={name}>
             <h2>{name}</h2>
+            <time dateTime={formatDate(date, datetime_format)}>
+              {formatDate(date, readable_format)}
+            </time>
+            {description ? <p>{description}</p> : null}
             <ArtMainLayout>
               <Cells cellsPerRow={cells_per_row} cellsArray={cells} />
               <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
@@ -30,4 +39,4 @@ const ArtsRegister = ({ storedArts }: IArtsRegisterProps): JSX.Element => {
   );
 };
 
-export default ArtsRegister;
+export default RegisteredArts;

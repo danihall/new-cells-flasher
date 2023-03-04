@@ -6,8 +6,7 @@ import {
   selectCountdown,
 } from "../../store/features/countdownIsReached";
 import { resetCellsKey } from "../../store/features/resetCells";
-
-import css from "./ButtonReset.module.scss";
+import Button from "../Button/Button";
 
 const ButtonReset = (): JSX.Element => {
   const countdown_is_reached = useSelector(selectCountdown);
@@ -19,13 +18,9 @@ const ButtonReset = (): JSX.Element => {
   }, []);
 
   return (
-    <button
-      className={css["button-reset"]}
-      disabled={!countdown_is_reached}
-      onClick={handleClick}
-    >
+    <Button disabled={!countdown_is_reached} onClick={handleClick}>
       reset
-    </button>
+    </Button>
   );
 };
 

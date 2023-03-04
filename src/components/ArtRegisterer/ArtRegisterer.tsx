@@ -18,15 +18,10 @@ const ArtRegisterer = (): JSX.Element => {
    */
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     const current_state = store.getState() as RootState;
-    const current_date = Intl.DateTimeFormat("fr", {
-      dateStyle: "full",
-      timeStyle: "short",
-      timeZone: "Europe/Paris",
-    }).format(new Date());
 
     const new_art = {
       ...Object.fromEntries(new FormData(event.currentTarget)),
-      date: current_date,
+      date: new Date().toLocaleDateString(),
       cells: current_state.cellsState.cells,
     } as IArt;
 
