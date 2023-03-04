@@ -1,4 +1,4 @@
-import { useState, useCallback, PointerEvent } from "react";
+import { useState, useCallback } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 
 import { computeResult } from "../../helpers/computeResult";
@@ -15,7 +15,7 @@ import css from "./CellsContainer.module.scss";
 
 interface ICellsProps {
   cellsPerRow: number;
-  cellsArray?: Array<string | null> | null;
+  cellsArray?: TCells | null;
 }
 
 /**
@@ -35,7 +35,7 @@ const Cells = ({
   cellsArray = null,
 }: ICellsProps): JSX.Element => {
   const store = useStore();
-  const [cells, setCells] = useState<Array<string | null>>(
+  const [cells, setCells] = useState<TCells>(
     cellsArray ? cellsArray : makeArray(cellsPerRow)
   );
   const [is_player_x, setPlayerTurn] = useState(true);

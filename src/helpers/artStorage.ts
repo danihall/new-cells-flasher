@@ -4,7 +4,7 @@ export interface IArt {
   name: string;
   date: string;
   description?: string;
-  cells: Array<string | null>;
+  cells: TCells;
 }
 
 let storage = localStorage.getItem(STORAGE_NAME);
@@ -31,7 +31,6 @@ const registerArtStorage = () => {
   } catch (reason) {
     console.error(reason);
   }
-  console.log(localStorage.getItem(STORAGE_NAME));
 };
 
 const getStoredArts = () => art_storage;

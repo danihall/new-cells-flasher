@@ -5,7 +5,7 @@ import { makeArray } from "../../helpers/makeArray";
 
 interface ICellsStateState {
   cellsState: {
-    cells: Array<string | null>;
+    cells: TCells;
     cells_per_row: number;
   };
 }
