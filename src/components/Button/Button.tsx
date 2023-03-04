@@ -1,15 +1,18 @@
-/*
-interface IButtonProps {
-    handleClick?: () => void;
-    text: string;
-}
-*/
+import { ComponentProps, ReactNode } from "react";
+
 import css from "./Button.module.scss";
 
-const Button = (props: any): JSX.Element => {
+interface IButtonProps {
+  children: ReactNode;
+}
+
+const Button = ({
+  children,
+  ...props
+}: IButtonProps & ComponentProps<"button">): JSX.Element => {
   return (
     <button className={css.button} {...props}>
-      {props.children}
+      {children}
     </button>
   );
 };

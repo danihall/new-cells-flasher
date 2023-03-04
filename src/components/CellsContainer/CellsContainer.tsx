@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, PointerEvent } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 
 import { computeResult } from "../../helpers/computeResult";
@@ -40,7 +40,12 @@ const Cells = ({
   );
   const [is_player_x, setPlayerTurn] = useState(true);
   const [winning_moves, setWinningMoves] = useState<Array<number>>([]);
+  const [can_draw, setCanDraw] = useState(false);
   const dispatch = useDispatch();
+
+  const handlePointerMove = (event: PointerEvent) => {
+    console.log(event);
+  };
 
   const handleClick = useCallback(function (this: {
     cells: Array<null | string>;
@@ -84,7 +89,14 @@ const Cells = ({
   } as React.CSSProperties;
 
   return (
-    <div style={inline_style} className={css.cells}>
+    <div
+      style={inline_style}
+      className={css.cells}
+      onPointerDown={() => setCanDraw(true)}
+      onPointerUp={() => setCanDraw(false)}
+      onPointerLeave={() => setCanDraw(false)}
+      onPointerMove={can_draw ? handlePointerMove : undefined}
+    >
       {cells.map((cell, index) => {
         return (
           <div

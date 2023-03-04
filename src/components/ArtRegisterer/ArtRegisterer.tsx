@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { useStore } from "react-redux";
 
 import {
@@ -7,10 +7,16 @@ import {
   registerArtStorage,
 } from "../../helpers/artStorage";
 import { RootState } from "../../store/store";
+import Button from "../Button/Button";
 
 const ArtRegisterer = (): JSX.Element => {
+  const [value, setValue] = useState("");
   const store = useStore();
   const dialog_form = useRef<HTMLDialogElement>(null);
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  }, []);
 
   /**
    * event.preventDefault() is not needed, because the form has the attribute [method="dialog"]
@@ -31,9 +37,9 @@ const ArtRegisterer = (): JSX.Element => {
 
   return (
     <>
-      <button onClick={() => dialog_form.current?.showModal()}>
+      <Button onClick={() => dialog_form.current?.showModal()}>
         Register Art
-      </button>
+      </Button>
 
       <dialog id="dialog-form" ref={dialog_form}>
         <form method="dialog" onSubmit={handleSubmit}>
@@ -43,8 +49,10 @@ const ArtRegisterer = (): JSX.Element => {
               id="name"
               name="name"
               type="text"
-              placeholder="type any name for this pixel art"
               required
+              placeholder="type any name for this pixel art"
+              value={value}
+              onChange={handleChange}
             />
             <label htmlFor="description">Description:</label>
             <textarea
@@ -55,10 +63,10 @@ const ArtRegisterer = (): JSX.Element => {
           </div>
 
           <div>
-            <button type="button" onClick={() => dialog_form.current?.close()}>
+            <Button type="button" onClick={() => dialog_form.current?.close()}>
               Cancel
-            </button>
-            <button type="submit">Register Art</button>
+            </Button>
+            <Button type="submit">Register Art</Button>
           </div>
         </form>
       </dialog>
