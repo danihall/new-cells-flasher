@@ -1,0 +1,20 @@
+.svg {
+    display: block;
+
+    &>circle {
+        stroke: var(--main-color);
+        transform-origin: center center;
+        transform: rotate(-90deg);
+        animation: draw_dash var(--countdown-time) linear forwards;
+    }
+
+    &.hidden {
+        visibility: hidden;
+    }
+}
+
+@keyframes draw_dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
