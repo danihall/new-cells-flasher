@@ -4,13 +4,13 @@ import RegisteredArts from "../components/RegisteredArts/RegisteredArts";
 import { TStoredArts } from "../custom_types/stored-arts";
 
 const PreviousArts = (): JSX.Element => {
-  const storedArts: TStoredArts = useLoaderData() as TStoredArts;
+  const stored_arts: TStoredArts = useLoaderData() as TStoredArts;
 
   return (
     <>
-      <h1>previous game</h1>
-      {storedArts && storedArts.length ? (
-        <RegisteredArts storedArts={storedArts} />
+      <h1>previous arts</h1>
+      {stored_arts && stored_arts.length ? (
+        <RegisteredArts storedArts={stored_arts} />
       ) : (
         <p>There are no stored Arts!</p>
       )}

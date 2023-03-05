@@ -1,29 +1,37 @@
 import { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, useStore } from "react-redux";
 
 import {
   restartAnimation,
   pauseAnimation,
 } from "../../helpers/animationHelpers";
+import { saveLastArt } from "../../helpers/artStorage";
 import {
   selectCountdown,
   setCountdownReached,
 } from "../../store/features/countdownIsReached";
 import { selectLinesAreDrawn } from "../../store/features/linesAreDrawn";
 import { selectNewRoundInProgress } from "../../store/features/newRoundInProgress";
+import { RootState } from "../../store/store";
 
 import css from "./Timer.module.scss";
 
 const Timer = (): JSX.Element => {
+  console.log("Timer");
   const lines_are_drawn = useSelector(selectLinesAreDrawn);
   const new_round_in_progress = useSelector(selectNewRoundInProgress);
   const countdown_is_reached = useSelector(selectCountdown);
+  console.log({ lines_are_drawn, new_round_in_progress, countdown_is_reached });
+
+  const store = useStore();
   const dispatch = useDispatch();
 
   const circle = useRef<SVGCircleElement>(null);
   const className = css.svg + (lines_are_drawn ? "" : ` ${css.hidden}`);
 
   const handleAnimationEnd = () => {
+    const cells = (store.getState() as RootState).cellsState.cells;
+    saveLastArt(cells);
     dispatch(setCountdownReached(true));
   };
 
@@ -34,6 +42,7 @@ const Timer = (): JSX.Element => {
       circle.current?.addEventListener("animationend", handleAnimationEnd, {
         once: true,
       });
+      dispatch(setCountdownReached(false));
       restartAnimation(circle.current);
     }
   }, [new_round_in_progress, lines_are_drawn]);

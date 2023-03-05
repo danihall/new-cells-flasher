@@ -10,6 +10,7 @@ import Button from "../Button/Button";
 
 const ButtonReset = (): JSX.Element => {
   const countdown_is_reached = useSelector(selectCountdown);
+  console.log("ButtonReset", countdown_is_reached);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {

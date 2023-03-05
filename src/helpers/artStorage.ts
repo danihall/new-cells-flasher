@@ -1,4 +1,5 @@
-import { STORAGE_NAME } from "../constants";
+import { STORAGE_NAME, LAST_ART_NAME } from "../constants";
+import { TCells } from "../custom_types/cells";
 import { IArt, TStoredArts } from "../custom_types/stored-arts";
 
 let storage = localStorage.getItem(STORAGE_NAME);
@@ -29,9 +30,27 @@ const registerArtStorage = () => {
 
 const getStoredArts = () => art_storage;
 
+const saveLastArt = (last_art: TCells) => {
+  try {
+    localStorage.setItem(LAST_ART_NAME, JSON.stringify(last_art));
+  } catch (reason) {
+    console.error(reason);
+  }
+};
+
+const getLastArt = (): TCells | null => {
+  const last_saved_art = localStorage.getItem(LAST_ART_NAME);
+  if (last_saved_art) {
+    return JSON.parse(last_saved_art);
+  }
+  return null;
+};
+
 export {
   art_storage_is_available,
   addInArtStorage,
   registerArtStorage,
   getStoredArts,
+  getLastArt,
+  saveLastArt,
 };

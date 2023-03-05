@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import { getStoredArts } from "./helpers/artStorage";
+import { getStoredArts, getLastArt } from "./helpers/artStorage";
 import Home from "./pages/home";
 import store from "./store/store";
 
@@ -32,6 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/last-art",
+        loader: getLastArt,
         element: (
           <Suspense>
             <LastArt />
