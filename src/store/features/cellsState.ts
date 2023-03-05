@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { MIN_CELLS_PER_ROW } from "../../constants";
+import { TCells } from "../../custom_types/cells";
 import { makeArray } from "../../helpers/makeArray";
 
 interface ICellsStateState {

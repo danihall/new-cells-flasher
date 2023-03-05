@@ -1,15 +1,13 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps } from "react";
+
+import { IHOC } from "../../custom_types/hoc";
 
 import css from "./Button.module.scss";
-
-interface IButtonProps {
-  children: ReactNode;
-}
 
 const Button = ({
   children,
   ...props
-}: IButtonProps & ComponentProps<"button">): JSX.Element => {
+}: IHOC & ComponentProps<"button">): JSX.Element => {
   return (
     <button className={css.button} {...props}>
       {children}

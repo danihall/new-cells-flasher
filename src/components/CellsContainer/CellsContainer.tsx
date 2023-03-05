@@ -1,6 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, MouseEvent, PointerEvent } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 
+import { TCells } from "../../custom_types/cells";
 import { computeResult } from "../../helpers/computeResult";
 import { makeArray } from "../../helpers/makeArray";
 import {
@@ -17,6 +18,8 @@ interface ICellsProps {
   cellsPerRow: number;
   cellsArray?: TCells | null;
 }
+
+type TWinningMoves = Array<number>;
 
 /**
  * This container provides a way to reset the state of Cells by way of the "key" prop update.
@@ -39,36 +42,33 @@ const Cells = ({
     cellsArray ? cellsArray : makeArray(cellsPerRow)
   );
   const [is_player_x, setPlayerTurn] = useState(true);
-  const [winning_moves, setWinningMoves] = useState<Array<number>>([]);
+  const [winning_moves, setWinningMoves] = useState<TWinningMoves>([]);
   const [can_draw, setCanDraw] = useState(false);
+
   const dispatch = useDispatch();
 
-  const handlePointerEvent = useCallback(function (this: {
-    cells: Array<null | string>;
-    index: number;
-    is_player_x: boolean;
-  }) {
+  const handlePointerEvent = (event: MouseEvent | PointerEvent) => {
     const { linesAreDrawn, countdownIsReached } = store.getState() as RootState;
 
     if (!linesAreDrawn || countdownIsReached) {
       return;
     }
 
-    const new_cells = [...this.cells];
-    new_cells[this.index] = this.is_player_x ? "x" : "o";
+    const index = Number((event.target as HTMLElement).dataset.key);
+    const new_cells = [...cells];
+    new_cells[index] = is_player_x ? "x" : "o";
     const new_result = computeResult(new_cells, cellsPerRow);
 
     setWinningMoves(Array.from(new Set([...winning_moves, ...new_result])));
     setCells(new_cells);
-    setPlayerTurn(!this.is_player_x);
+    setPlayerTurn(!is_player_x);
 
     dispatch(updateCellsState(new_cells));
     dispatch(setNewRoundInProgress());
-  },
-  []);
+  };
 
   const setClassName = useCallback(
-    (winning_moves: Array<number>, cell: null | string, index: number) => {
+    (winning_moves: TWinningMoves, cell: null | string, index: number) => {
       if (cell) {
         const cell_class: string = css[`player-${cell}`];
         const winner_class: string =
@@ -93,15 +93,14 @@ const Cells = ({
       onPointerLeave={() => setCanDraw(false)}
     >
       {cells.map((cell, index) => {
-        const context = { cells, index, is_player_x };
+        //const context = { index };
         return (
           <div
             className={setClassName(winning_moves, cell, index)}
+            data-key={index}
             key={index.toString()}
-            onPointerMove={
-              can_draw && !cell ? handlePointerEvent.bind(context) : undefined
-            }
-            onClick={!cell ? handlePointerEvent.bind(context) : undefined}
+            onPointerMove={can_draw && !cell ? handlePointerEvent : undefined}
+            onClick={!cell ? handlePointerEvent : undefined}
           >
             {cell}
           </div>

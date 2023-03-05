@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 
 import RegisteredArts from "../components/RegisteredArts/RegisteredArts";
-import { IArt } from "../helpers/artStorage";
+import { TStoredArts } from "../custom_types/stored-arts";
 
 const PreviousArts = (): JSX.Element => {
-  const storedArts: Array<IArt> | null = useLoaderData() as Array<IArt> | null;
+  const storedArts: TStoredArts = useLoaderData() as TStoredArts;
 
   return (
     <>

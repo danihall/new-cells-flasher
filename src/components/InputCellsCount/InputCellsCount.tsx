@@ -7,12 +7,12 @@ import { setCountdownReached } from "../../store/features/countdownIsReached";
 import { RootState } from "../../store/store";
 
 const InputCellsCount = (): JSX.Element => {
-  const [value, setValue] = useState(MIN_CELLS_PER_ROW);
+  const [value, setValue] = useState(`${MIN_CELLS_PER_ROW}`);
   const store = useStore();
   const dispatch = useDispatch();
 
   const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => setValue(+event.target.value),
+    (event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value),
     []
   );
 

@@ -1,1 +1,1 @@
-type TCells = Array<string | null>;
+export type TCells = Array<string | null>;

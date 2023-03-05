@@ -1,11 +1,8 @@
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { useStore } from "react-redux";
 
-import {
-  IArt,
-  addInArtStorage,
-  registerArtStorage,
-} from "../../helpers/artStorage";
+import { IArt } from "../../custom_types/stored-arts";
+import { addInArtStorage, registerArtStorage } from "../../helpers/artStorage";
 import { RootState } from "../../store/store";
 import Button from "../Button/Button";
 

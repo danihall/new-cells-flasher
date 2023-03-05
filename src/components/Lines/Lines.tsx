@@ -43,9 +43,8 @@ const Lines = ({
     []
   );
 
-  const onAnimationEnd = (event: Event) => {
+  const handleAnimationEnd = () => {
     dispatch(drawingIsDone(true));
-    event.target?.removeEventListener(event.type, onAnimationEnd);
   };
 
   useEffect(() => {
@@ -60,7 +59,8 @@ const Lines = ({
 
       lines_vertical.current[0].addEventListener(
         "animationend",
-        onAnimationEnd
+        handleAnimationEnd,
+        { once: true }
       );
 
       for (let i = 0; i <= middle_line; i++) {

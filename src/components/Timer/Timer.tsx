@@ -23,8 +23,7 @@ const Timer = (): JSX.Element => {
   const circle = useRef<SVGCircleElement>(null);
   const className = css.svg + (lines_are_drawn ? "" : ` ${css.hidden}`);
 
-  const onAnimationEnd = (event: any) => {
-    event.target?.removeEventListener(event.type, onAnimationEnd);
+  const handleAnimationEnd = () => {
     dispatch(setCountdownReached(true));
   };
 
@@ -32,6 +31,9 @@ const Timer = (): JSX.Element => {
     pauseAnimation(circle.current);
 
     if (lines_are_drawn) {
+      circle.current?.addEventListener("animationend", handleAnimationEnd, {
+        once: true,
+      });
       restartAnimation(circle.current);
     }
   }, [new_round_in_progress, lines_are_drawn]);
@@ -60,7 +62,6 @@ const Timer = (): JSX.Element => {
         strokeDasharray="1"
         strokeDashoffset="1"
         fill="none"
-        onAnimationEnd={onAnimationEnd}
       />
     </svg>
   );

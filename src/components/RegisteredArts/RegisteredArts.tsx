@@ -1,4 +1,4 @@
-import { IArt } from "../../helpers/artStorage";
+import { IArt } from "../../custom_types/stored-arts";
 import {
   formatDate,
   readable_format,

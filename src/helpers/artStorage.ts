@@ -1,11 +1,5 @@
 import { STORAGE_NAME } from "../constants";
-
-export interface IArt {
-  name: string;
-  date: string;
-  description?: string;
-  cells: TCells;
-}
+import { IArt, TStoredArts } from "../custom_types/stored-arts";
 
 let storage = localStorage.getItem(STORAGE_NAME);
 
@@ -15,7 +9,7 @@ if (!storage) {
 }
 
 const art_storage_is_available = !!storage;
-const art_storage: Array<IArt> | null = storage ? JSON.parse(storage) : null;
+const art_storage: TStoredArts = storage ? JSON.parse(storage) : null;
 
 const addInArtStorage = (new_art: IArt) => {
   if (art_storage?.find((art) => art.name === new_art.name)) {
