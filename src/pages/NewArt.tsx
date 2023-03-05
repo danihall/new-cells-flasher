@@ -1,6 +1,6 @@
 import ArtFooterLayout from "../components/ArtFooterLayout/ArtFooterLayout";
 import ArtMainLayout from "../components/ArtMainLayout/ArtMainLayout";
-import ArtRegisterer from "../components/ArtRegisterer/ArtRegisterer";
+import ButtonRegisterArt from "../components/ArtRegisterer/ArtRegisterer";
 import ButtonReset from "../components/ButtonReset/ButtonReset";
 import CellsContainer from "../components/CellsContainer/CellsContainer";
 import InputCellsCount from "../components/InputCellsCount/InputCellsCount";
@@ -21,7 +21,7 @@ const NewArt = () => {
         <Timer />
         <div>
           <ButtonReset />
-          {art_storage_is_available ? <ArtRegisterer /> : null}
+          {art_storage_is_available ? <ButtonRegisterArt /> : null}
         </div>
       </ArtFooterLayout>
     </>

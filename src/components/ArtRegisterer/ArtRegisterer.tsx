@@ -1,14 +1,17 @@
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
-import { useStore } from "react-redux";
+import { useStore, useSelector } from "react-redux";
 
 import { IArt } from "../../custom_types/stored-arts";
 import { addInArtStorage, registerArtStorage } from "../../helpers/artStorage";
+import { selectCountdown } from "../../store/features/countdownIsReached";
 import { RootState } from "../../store/store";
 import Button from "../Button/Button";
 
 const ArtRegisterer = (): JSX.Element => {
+  const countdown_is_reached = useSelector(selectCountdown);
   const [value, setValue] = useState("");
   const store = useStore();
+
   const dialog_form = useRef<HTMLDialogElement>(null);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +37,10 @@ const ArtRegisterer = (): JSX.Element => {
 
   return (
     <>
-      <Button onClick={() => dialog_form.current?.showModal()}>
+      <Button
+        disabled={!countdown_is_reached}
+        onClick={() => dialog_form.current?.showModal()}
+      >
         Register Art
       </Button>
 
@@ -63,7 +69,7 @@ const ArtRegisterer = (): JSX.Element => {
             <Button type="button" onClick={() => dialog_form.current?.close()}>
               Cancel
             </Button>
-            <Button type="submit">Register Art</Button>
+            <Button type="submit">Validate Art</Button>
           </div>
         </form>
       </dialog>
