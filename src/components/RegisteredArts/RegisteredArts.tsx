@@ -19,7 +19,7 @@ const RegisteredArts = ({
   storedArts: TStoredArts;
 }): JSX.Element => {
   const deleteArt = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log((event.target as HTMLButtonElement).name);
+    console.log((event.target as HTMLButtonElement).name, event.type);
   };
 
   return (
