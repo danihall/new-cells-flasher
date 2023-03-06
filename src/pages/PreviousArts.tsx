@@ -4,7 +4,7 @@ import RegisteredArts from "../components/RegisteredArts/RegisteredArts";
 import { TStoredArts } from "../custom_types/stored-arts";
 
 const PreviousArts = (): JSX.Element => {
-  const stored_arts: TStoredArts = useLoaderData() as TStoredArts;
+  const stored_arts: TStoredArts | null = useLoaderData() as TStoredArts | null;
 
   return (
     <>

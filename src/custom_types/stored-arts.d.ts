@@ -7,4 +7,4 @@ export interface IArt {
   cells: TCells;
 }
 
-export type TStoredArts = Array<IArt> | null;
+export type TStoredArts = Array<IArt>;

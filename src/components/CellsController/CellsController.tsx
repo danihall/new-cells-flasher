@@ -54,29 +54,33 @@ const Cells = ({
       : []
   );
   const [can_draw, setCanDraw] = useState(false);
-  const should_add_events = !!forceCellsArray;
+  const should_add_events = !forceCellsArray;
 
   const dispatch = useDispatch();
 
-  const handlePointerEvent = (event: MouseEvent | PointerEvent) => {
-    const { linesAreDrawn, countdownIsReached } = store.getState() as RootState;
+  const handlePointerEvent = useCallback(
+    (index: number) => () => {
+      const { linesAreDrawn, countdownIsReached } =
+        store.getState() as RootState;
 
-    if (!linesAreDrawn || countdownIsReached) {
-      return;
-    }
+      if (!linesAreDrawn || countdownIsReached || cells[index]) {
+        return;
+      }
 
-    const index = Number((event.target as HTMLElement).dataset.key);
-    const new_cells = [...cells];
-    new_cells[index] = is_player_x ? "x" : "o";
-    const new_result = computeResult(new_cells, cellsPerRow);
+      //const index = Number((event.target as HTMLElement).dataset.key);
+      const new_cells = [...cells];
+      new_cells[index] = is_player_x ? "x" : "o";
+      const new_result = computeResult(new_cells, cellsPerRow);
 
-    setWinningMoves(Array.from(new Set([...winning_moves, ...new_result])));
-    setCells(new_cells);
-    setPlayerTurn(!is_player_x);
+      setWinningMoves(Array.from(new Set([...winning_moves, ...new_result])));
+      setCells(new_cells);
+      setPlayerTurn(!is_player_x);
 
-    dispatch(updateCellsState(new_cells));
-    dispatch(setNewRoundInProgress());
-  };
+      dispatch(updateCellsState(new_cells));
+      dispatch(setNewRoundInProgress());
+    },
+    [cells]
+  );
 
   const setClassName = useCallback(
     (winning_moves: TWinningMoves, cell: null | string, index: number) => {
@@ -112,12 +116,10 @@ const Cells = ({
           <div
             {...{
               className: setClassName(winning_moves, cell, index),
-              "data-key": index,
               key: index.toString(),
               ...(should_add_events && {
-                onPointerMove:
-                  can_draw && !cell ? handlePointerEvent : undefined,
-                onClick: !cell ? handlePointerEvent : undefined,
+                onPointerMove: can_draw ? handlePointerEvent(index) : undefined,
+                onClick: handlePointerEvent(index),
               }),
             }}
           >

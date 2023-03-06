@@ -46,6 +46,8 @@ const getLastArt = (): TCells | null => {
   return null;
 };
 
+//const deleteArt = (name: string) => {}
+
 export {
   art_storage_is_available,
   addInArtStorage,
