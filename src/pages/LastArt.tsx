@@ -6,7 +6,7 @@ import ArtFooterLayout from "../components/ArtFooterLayout/ArtFooterLayout";
 import ArtMainLayout from "../components/ArtMainLayout/ArtMainLayout";
 import ArtRegisterer from "../components/ArtRegisterer/ArtRegisterer";
 import ButtonReset from "../components/ButtonReset/ButtonReset";
-import { Cells } from "../components/CellsContainer/CellsContainer";
+import { Cells } from "../components/CellsController/CellsController";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
 import { TCells } from "../custom_types/cells";
@@ -31,7 +31,7 @@ const LastArt = (): JSX.Element => {
     return (
       <>
         <ArtMainLayout>
-          <Cells cellsPerRow={cells_per_row} cellsArray={last_art} />
+          <Cells cellsPerRow={cells_per_row} forceCellsArray={last_art} />
           <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
         </ArtMainLayout>
 

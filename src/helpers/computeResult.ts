@@ -4,13 +4,13 @@ import { cellsLineChecker } from "./cellsLineChecker";
 
 const computeResult = (
   cells: Array<null | string>,
-  cells_per_line: number
+  cells_per_row: number
 ): Array<number> => {
   const winning_lines: Array<Array<number>> = [];
   const params = {
     i: 0,
     cells,
-    cells_per_line,
+    cells_per_row,
   };
 
   cells.forEach((cell, index, array) => {

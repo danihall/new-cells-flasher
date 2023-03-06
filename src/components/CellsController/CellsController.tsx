@@ -1,4 +1,10 @@
-import { useState, useCallback, MouseEvent, PointerEvent } from "react";
+import {
+  useState,
+  useCallback,
+  MouseEvent,
+  PointerEvent,
+  CSSProperties,
+} from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 
 import { TCells } from "../../custom_types/cells";
@@ -12,11 +18,11 @@ import { setNewRoundInProgress } from "../../store/features/newRoundInProgress";
 import { selectCellsKey } from "../../store/features/resetCells";
 import { RootState } from "../../store/store";
 
-import css from "./CellsContainer.module.scss";
+import css from "./CellsController.module.scss";
 
 interface ICellsProps {
   cellsPerRow: number;
-  cellsArray?: TCells | null;
+  forceCellsArray?: TCells | null;
 }
 
 type TWinningMoves = Array<number>;
@@ -24,9 +30,9 @@ type TWinningMoves = Array<number>;
 /**
  * This container provides a way to reset the state of Cells by way of the "key" prop update.
  * This allows to efficiently re-render Cells when user changes the number of cells per row.
- * Surprisingly, it is way faster than setting a "cellsArray" prop on a store and accessing it via redux.
+ * Surprisingly, it is way faster than setting a "forceCellsArray" prop on a store and accessing it via redux.
  */
-const CellsContainer = (): JSX.Element => {
+const CellsController = (): JSX.Element => {
   const cells_per_row = useSelector(selectCellsPerRow);
   const cells_key = useSelector(selectCellsKey);
 
@@ -35,15 +41,20 @@ const CellsContainer = (): JSX.Element => {
 
 const Cells = ({
   cellsPerRow,
-  cellsArray = null,
+  forceCellsArray = null,
 }: ICellsProps): JSX.Element => {
   const store = useStore();
   const [cells, setCells] = useState<TCells>(
-    cellsArray ? cellsArray : makeArray(cellsPerRow)
+    forceCellsArray ? forceCellsArray : makeArray(cellsPerRow)
   );
   const [is_player_x, setPlayerTurn] = useState(true);
-  const [winning_moves, setWinningMoves] = useState<TWinningMoves>([]);
+  const [winning_moves, setWinningMoves] = useState<TWinningMoves>(
+    forceCellsArray
+      ? Array.from(new Set(computeResult(forceCellsArray, cellsPerRow)))
+      : []
+  );
   const [can_draw, setCanDraw] = useState(false);
+  const should_add_events = !!forceCellsArray;
 
   const dispatch = useDispatch();
 
@@ -82,25 +93,33 @@ const Cells = ({
 
   const inline_style = {
     "--cells-per-row": cellsPerRow,
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   return (
     <div
-      style={inline_style}
-      className={css.cells}
-      onPointerDown={() => setCanDraw(true)}
-      onPointerUp={() => setCanDraw(false)}
-      onPointerLeave={() => setCanDraw(false)}
+      {...{
+        style: inline_style,
+        className: css.cells,
+        ...(should_add_events && {
+          onPointerDown: () => setCanDraw(true),
+          onPointerUp: () => setCanDraw(false),
+          onPointerLeave: () => setCanDraw(false),
+        }),
+      }}
     >
       {cells.map((cell, index) => {
-        //const context = { index };
         return (
           <div
-            className={setClassName(winning_moves, cell, index)}
-            data-key={index}
-            key={index.toString()}
-            onPointerMove={can_draw && !cell ? handlePointerEvent : undefined}
-            onClick={!cell ? handlePointerEvent : undefined}
+            {...{
+              className: setClassName(winning_moves, cell, index),
+              "data-key": index,
+              key: index.toString(),
+              ...(should_add_events && {
+                onPointerMove:
+                  can_draw && !cell ? handlePointerEvent : undefined,
+                onClick: !cell ? handlePointerEvent : undefined,
+              }),
+            }}
           >
             {cell}
           </div>
@@ -110,5 +129,5 @@ const Cells = ({
   );
 };
 
-export default CellsContainer;
+export default CellsController;
 export { Cells };

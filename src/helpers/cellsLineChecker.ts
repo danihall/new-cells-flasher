@@ -2,7 +2,7 @@ type TCells = Array<null | string>;
 type TCheck = false | Array<number>;
 interface IParams {
   i: number;
-  cells_per_line: number;
+  cells_per_row: number;
   cells: TCells;
 }
 const cellsLineChecker = {
@@ -17,22 +17,22 @@ const cellsLineChecker = {
     const indexes = [i, i + 1, i + 2];
     return this._check(indexes, cells);
   },
-  vertical({ i, cells_per_line, cells }: IParams): TCheck {
-    const indexes = [i, i + cells_per_line, i + cells_per_line * 2];
+  vertical({ i, cells_per_row, cells }: IParams): TCheck {
+    const indexes = [i, i + cells_per_row, i + cells_per_row * 2];
     return this._check(indexes, cells);
   },
-  diagonalRight({ i, cells_per_line, cells }: IParams): TCheck {
-    if (cells_per_line - (i % cells_per_line) < 3) {
+  diagonalRight({ i, cells_per_row, cells }: IParams): TCheck {
+    if (cells_per_row - (i % cells_per_row) < 3) {
       return false;
     }
-    const indexes = [i, i + cells_per_line + 1, i + cells_per_line * 2 + 2];
+    const indexes = [i, i + cells_per_row + 1, i + cells_per_row * 2 + 2];
     return this._check(indexes, cells);
   },
-  diagonalLeft({ i, cells_per_line, cells }: IParams): TCheck {
-    if (i % cells_per_line < 2) {
+  diagonalLeft({ i, cells_per_row, cells }: IParams): TCheck {
+    if (i % cells_per_row < 2) {
       return false;
     }
-    const indexes = [i, i + cells_per_line - 1, i + cells_per_line * 2 - 2];
+    const indexes = [i, i + cells_per_row - 1, i + cells_per_row * 2 - 2];
     return this._check(indexes, cells);
   },
 };

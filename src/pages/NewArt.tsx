@@ -2,7 +2,7 @@ import ArtFooterLayout from "../components/ArtFooterLayout/ArtFooterLayout";
 import ArtMainLayout from "../components/ArtMainLayout/ArtMainLayout";
 import ArtsRegisterer from "../components/ArtRegisterer/ArtRegisterer";
 import ButtonReset from "../components/ButtonReset/ButtonReset";
-import CellsContainer from "../components/CellsContainer/CellsContainer";
+import CellsController from "../components/CellsController/CellsController";
 import InputCellsCount from "../components/InputCellsCount/InputCellsCount";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
@@ -12,7 +12,7 @@ const NewArt = () => {
   return (
     <>
       <ArtMainLayout>
-        <CellsContainer />
+        <CellsController />
         <Lines />
       </ArtMainLayout>
 

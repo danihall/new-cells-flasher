@@ -5,7 +5,7 @@ import {
   datetime_format,
 } from "../../helpers/formatDate";
 import ArtMainLayout from "../ArtMainLayout/ArtMainLayout";
-import { Cells } from "../CellsContainer/CellsContainer";
+import { Cells } from "../CellsController/CellsController";
 import Lines from "../Lines/Lines";
 
 import css from "./RegisteredArts.module.scss";
@@ -29,7 +29,7 @@ const RegisteredArts = ({ storedArts }: IRegisteredArtsProps): JSX.Element => {
             </time>
             {description ? <p>{description}</p> : null}
             <ArtMainLayout>
-              <Cells cellsPerRow={cells_per_row} cellsArray={cells} />
+              <Cells cellsPerRow={cells_per_row} forceCellsArray={cells} />
               <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
             </ArtMainLayout>
           </div>
