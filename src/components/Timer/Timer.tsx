@@ -17,11 +17,9 @@ import { RootState } from "../../store/store";
 import css from "./Timer.module.scss";
 
 const Timer = (): JSX.Element => {
-  console.log("Timer");
   const lines_are_drawn = useSelector(selectLinesAreDrawn);
   const new_round_in_progress = useSelector(selectNewRoundInProgress);
   const countdown_is_reached = useSelector(selectCountdown);
-  console.log({ lines_are_drawn, new_round_in_progress, countdown_is_reached });
 
   const store = useStore();
   const dispatch = useDispatch();

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 
@@ -11,6 +12,7 @@ import Timer from "../components/Timer/Timer";
 import { TCells } from "../custom_types/cells";
 import { art_storage_is_available } from "../helpers/artStorage";
 import { setCountdownReached } from "../store/features/countdownIsReached";
+import { drawingIsDone } from "../store/features/linesAreDrawn";
 import { setNewRoundInProgress } from "../store/features/newRoundInProgress";
 
 const LastArt = (): JSX.Element => {
@@ -19,8 +21,12 @@ const LastArt = (): JSX.Element => {
   if (last_art) {
     const dispatch = useDispatch();
     const cells_per_row = last_art ? Math.sqrt(last_art.length) : 0;
-    dispatch(setNewRoundInProgress());
-    dispatch(setCountdownReached(false));
+
+    useEffect(() => {
+      dispatch(setNewRoundInProgress());
+      dispatch(setCountdownReached(false));
+      dispatch(drawingIsDone(true));
+    }, []);
 
     return (
       <>
@@ -30,9 +36,9 @@ const LastArt = (): JSX.Element => {
         </ArtMainLayout>
 
         <ArtFooterLayout>
-          <Timer key={Date.now()} />
+          <Timer />
           <div>
-            <ButtonReset />
+            <ButtonReset resetAllCells={false} />
             {art_storage_is_available ? <ArtRegisterer /> : null}
           </div>
         </ArtFooterLayout>

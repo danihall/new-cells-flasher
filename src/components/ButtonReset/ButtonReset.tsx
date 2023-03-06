@@ -8,14 +8,15 @@ import {
 import { resetCellsKey } from "../../store/features/resetCells";
 import Button from "../Button/Button";
 
-const ButtonReset = (): JSX.Element => {
+const ButtonReset = ({ resetAllCells = true }): JSX.Element => {
   const countdown_is_reached = useSelector(selectCountdown);
-  console.log("ButtonReset", countdown_is_reached);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
     dispatch(setCountdownReached(false));
-    dispatch(resetCellsKey());
+    if (resetAllCells) {
+      dispatch(resetCellsKey());
+    }
   }, []);
 
   return (
