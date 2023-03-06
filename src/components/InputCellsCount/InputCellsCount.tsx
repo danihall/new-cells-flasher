@@ -1,13 +1,17 @@
 import { useState, useCallback, ChangeEvent, PointerEvent } from "react";
-import { useDispatch, useStore } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { MIN_CELLS_PER_ROW, MAX_CELLS_PER_ROW } from "../../constants";
-import { setCellsPerRow } from "../../store/features/cellsState";
+import {
+  setCellsPerRow,
+  selectCellsPerRow,
+} from "../../store/features/cellsState";
 import { setCountdownReached } from "../../store/features/countdownIsReached";
 import { RootState } from "../../store/store";
 
 const InputCellsCount = (): JSX.Element => {
-  const [value, setValue] = useState(`${MIN_CELLS_PER_ROW}`);
+  const current_cells_per_row = useSelector(selectCellsPerRow);
+  const [value, setValue] = useState(`${current_cells_per_row}`);
   const store = useStore();
   const dispatch = useDispatch();
 
