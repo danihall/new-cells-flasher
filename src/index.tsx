@@ -41,6 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/previous-arts",
+        action: async ({ request }) => {
+          const data = await request.formData();
+          console.log(Object.fromEntries(data));
+          return null;
+        },
         loader: getStoredArts,
         element: (
           <Suspense>

@@ -22,7 +22,7 @@ const ArtRegisterer = (): JSX.Element => {
    * event.preventDefault() is not needed, because the form has the attribute [method="dialog"]
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
    */
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const registerArt = (event: FormEvent<HTMLFormElement>) => {
     const current_state = store.getState() as RootState;
 
     const new_art = {
@@ -45,7 +45,7 @@ const ArtRegisterer = (): JSX.Element => {
       </Button>
 
       <dialog id="dialog-form" ref={dialog_form}>
-        <form method="dialog" onSubmit={handleSubmit}>
+        <form method="dialog" onSubmit={registerArt}>
           <div>
             <label htmlFor="name">Name:</label>
             <input

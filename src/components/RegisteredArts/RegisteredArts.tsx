@@ -1,4 +1,5 @@
-import { MouseEvent } from "react";
+import { FormEvent } from "react";
+import { useSubmit } from "react-router-dom";
 
 import { TStoredArts } from "../../custom_types/stored-arts";
 import {
@@ -18,8 +19,12 @@ const RegisteredArts = ({
 }: {
   storedArts: TStoredArts;
 }): JSX.Element => {
-  const deleteArt = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log((event.target as HTMLButtonElement).name);
+  const submit = useSubmit();
+  const deleteArt = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    //console.log((event.target as HTMLButtonElement).name);
+    console.log(Object.fromEntries(new FormData(event.currentTarget)));
+    submit(event.currentTarget);
   };
 
   return (
@@ -41,9 +46,12 @@ const RegisteredArts = ({
               <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
             </ArtMainLayout>
 
-            <Button onClick={deleteArt} name={name}>
-              Delete Art
-            </Button>
+            <form onSubmit={deleteArt} method="delete">
+              <input type="hidden" name="entry_name" value={name} />
+              <Button type="submit" name={name} value={name}>
+                Delete Art
+              </Button>
+            </form>
           </div>
         );
       })}

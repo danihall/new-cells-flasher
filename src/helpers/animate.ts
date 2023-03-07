@@ -1,8 +1,13 @@
 import { restartAnimation } from "./animationHelpers";
 
-const template = (chunks: TemplateStringsArray, rest: number) =>
+/**
+ * Takes advantage of the fact that a Tagged Template Literal uses a "frozen" Array,
+ * wherer the "chunks" are always the same.
+ * This makes creating multiple different string from the same Tagged Template Literal faster.
+ */
+const template = (chunks: TemplateStringsArray, rest: number): string =>
   chunks[0] + rest + chunks[1];
-const createDelayString = (index: number) =>
+const createDelayString = (index: number): string =>
   template`animation-delay: ${index}ms`;
 
 const animate = (
