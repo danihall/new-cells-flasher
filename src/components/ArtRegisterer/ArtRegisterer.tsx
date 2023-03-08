@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { useStore, useSelector } from "react-redux";
 
 import { IArt } from "../../custom_types/stored-arts";
-import { addInArtStorage, registerArtStorage } from "../../helpers/artStorage";
+import { addInArtStorage } from "../../helpers/artStorage";
 import { selectCountdown } from "../../store/features/countdownIsReached";
 import { RootState } from "../../store/store";
 import Button from "../Button/Button";
@@ -32,7 +32,6 @@ const ArtRegisterer = (): JSX.Element => {
     } as IArt;
 
     addInArtStorage(new_art);
-    registerArtStorage();
   };
 
   return (

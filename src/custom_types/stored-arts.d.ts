@@ -7,4 +7,8 @@ export interface IArt {
   cells: TCells;
 }
 
+export interface IArtToDelete {
+  [entry_name: string]: FormDataEntryValue;
+}
+
 export type TStoredArts = Array<IArt>;

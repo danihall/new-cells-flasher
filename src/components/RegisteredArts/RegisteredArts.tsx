@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useSubmit } from "react-router-dom";
+import { useActionData, useSubmit } from "react-router-dom";
 
 import { TStoredArts } from "../../custom_types/stored-arts";
 import {
@@ -22,8 +22,6 @@ const RegisteredArts = ({
   const submit = useSubmit();
   const deleteArt = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //console.log((event.target as HTMLButtonElement).name);
-    console.log(Object.fromEntries(new FormData(event.currentTarget)));
     submit(event.currentTarget);
   };
 
@@ -47,8 +45,12 @@ const RegisteredArts = ({
             </ArtMainLayout>
 
             <form onSubmit={deleteArt} method="delete">
+              {/**
+               * Cannot use button value when submitting form because of event.preventDefault().
+               * So a <input type="hidden"> is used.
+               */}
               <input type="hidden" name="entry_name" value={name} />
-              <Button type="submit" name={name} value={name}>
+              <Button type="submit" name={name}>
                 Delete Art
               </Button>
             </form>

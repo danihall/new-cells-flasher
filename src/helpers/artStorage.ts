@@ -1,6 +1,6 @@
 import { STORAGE_NAME, LAST_ART_NAME } from "../constants";
 import { TCells } from "../custom_types/cells";
-import { IArt, TStoredArts } from "../custom_types/stored-arts";
+import { IArt, IArtToDelete, TStoredArts } from "../custom_types/stored-arts";
 
 let storage = localStorage.getItem(STORAGE_NAME);
 
@@ -12,20 +12,23 @@ if (!storage) {
 const art_storage_is_available = !!storage;
 const art_storage: TStoredArts = storage ? JSON.parse(storage) : null;
 
-const addInArtStorage = (new_art: IArt) => {
-  if (art_storage?.find((art) => art.name === new_art.name)) {
-    console.error(`There is already an art named ${new_art.name}`);
-    return;
-  }
-  art_storage?.push(new_art);
-};
-
 const registerArtStorage = () => {
   try {
     localStorage.setItem(STORAGE_NAME, JSON.stringify(art_storage));
   } catch (reason) {
     console.error(reason);
   }
+};
+
+const addInArtStorage = (new_art: IArt) => {
+  if (art_storage?.find((art) => art.name === new_art.name)) {
+    console.error(`There is already an art named ${new_art.name}`);
+    return;
+  }
+
+  art_storage?.push(new_art);
+
+  registerArtStorage();
 };
 
 const getStoredArts = () => art_storage;
@@ -46,13 +49,22 @@ const getLastArt = (): TCells | null => {
   return null;
 };
 
-//const deleteArt = (name: string) => {}
+const deleteArt = ({ entry_name }: IArtToDelete) => {
+  const art_to_delete_index = art_storage.findIndex(
+    (art) => art.name === entry_name
+  );
+
+  art_storage.splice(art_to_delete_index, 1);
+  registerArtStorage();
+
+  return art_storage;
+};
 
 export {
   art_storage_is_available,
   addInArtStorage,
-  registerArtStorage,
   getStoredArts,
   getLastArt,
   saveLastArt,
+  deleteArt,
 };

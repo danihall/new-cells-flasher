@@ -5,6 +5,7 @@ import { TStoredArts } from "../custom_types/stored-arts";
 
 const PreviousArts = (): JSX.Element => {
   const stored_arts: TStoredArts | null = useLoaderData() as TStoredArts | null;
+  console.log(stored_arts);
 
   return (
     <>

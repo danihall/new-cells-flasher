@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import { getStoredArts, getLastArt } from "./helpers/artStorage";
+import { getStoredArts, getLastArt, deleteArt } from "./helpers/artStorage";
 import Home from "./pages/home";
 import store from "./store/store";
 
@@ -43,8 +43,9 @@ const router = createBrowserRouter([
         path: "/previous-arts",
         action: async ({ request }) => {
           const data = await request.formData();
-          console.log(Object.fromEntries(data));
-          return null;
+          const stored_arts = deleteArt(Object.fromEntries(data));
+          console.log(stored_arts);
+          return stored_arts;
         },
         loader: getStoredArts,
         element: (
