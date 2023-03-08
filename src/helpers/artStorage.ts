@@ -25,6 +25,12 @@ const registerArtStorage = () => {
   }
 };
 
+/**
+ * Promise is used to streamline aggregation of Object returned when an error occurs.
+ * Technically, there is absolutely no need in the context of the project
+ * to use an async method to deal with registering persistent memory,
+ * but it's still more practical.
+ */
 const addInArtStorage = (new_art: IArt): Promise<IProcess> => {
   return new Promise<IProcess>((resolve, reject) => {
     if (art_storage && art_storage.find((art) => art.name === new_art.name)) {
