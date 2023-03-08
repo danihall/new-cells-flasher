@@ -5,9 +5,15 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import { getStoredArts, getLastArt, deleteArt } from "./helpers/artStorage";
+import { IArt } from "./custom_types/stored-arts";
+import {
+  addInArtStorage,
+  getStoredArts,
+  getLastArt,
+  deleteArt,
+} from "./helpers/artStorage";
 import Home from "./pages/home";
-import store from "./store/store";
+import store, { RootState } from "./store/store";
 
 const NewArt = lazy(() => import("./pages/NewArt"));
 const LastArt = lazy(() => import("./pages/LastArt"));
@@ -24,6 +30,19 @@ const router = createBrowserRouter([
       },
       {
         path: "new-art",
+        action: async ({ request }) => {
+          const data = await request.formData();
+          const current_state = store.getState() as RootState;
+
+          const new_art = {
+            ...Object.fromEntries(data),
+            date: new Date().toLocaleDateString(),
+            cells: current_state.cellsState.cells,
+          } as IArt;
+
+          addInArtStorage(new_art);
+          return null;
+        },
         element: (
           <Suspense>
             <NewArt />
@@ -43,9 +62,8 @@ const router = createBrowserRouter([
         path: "/previous-arts",
         action: async ({ request }) => {
           const data = await request.formData();
-          const stored_arts = deleteArt(Object.fromEntries(data));
-          console.log(stored_arts);
-          return stored_arts;
+          deleteArt(Object.fromEntries(data));
+          return null;
         },
         loader: getStoredArts,
         element: (
