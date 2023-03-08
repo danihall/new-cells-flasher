@@ -26,7 +26,7 @@ const registerArtStorage = () => {
 };
 
 const addInArtStorage = (new_art: IArt): Promise<IProcess> => {
-  return new Promise((resolve, reject) => {
+  return new Promise<IProcess>((resolve, reject) => {
     if (art_storage && art_storage.find((art) => art.name === new_art.name)) {
       reject(`There is already an art named ${new_art.name}`);
     }
