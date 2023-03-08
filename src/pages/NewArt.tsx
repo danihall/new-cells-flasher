@@ -1,3 +1,5 @@
+import { useActionData } from "react-router-dom";
+
 import ArtFooterLayout from "../components/ArtFooterLayout/ArtFooterLayout";
 import ArtMainLayout from "../components/ArtMainLayout/ArtMainLayout";
 import ArtsRegisterer from "../components/ArtRegisterer/ArtRegisterer";
@@ -6,9 +8,12 @@ import CellsController from "../components/CellsController/CellsController";
 import InputCellsCount from "../components/InputCellsCount/InputCellsCount";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
-import { art_storage_is_available } from "../helpers/artStorage";
+import ToastMessage from "../components/ToastMessage/ToastMessage";
+import { IProcess, art_storage_is_available } from "../helpers/artStorage";
 
 const NewArt = () => {
+  const art_added: IProcess = useActionData() as IProcess;
+
   return (
     <>
       <ArtMainLayout>
@@ -24,6 +29,9 @@ const NewArt = () => {
           {art_storage_is_available ? <ArtsRegisterer /> : null}
         </div>
       </ArtFooterLayout>
+      {art_added ? (
+        <ToastMessage type={art_added.ok ? "success" : "error"} />
+      ) : null}
     </>
   );
 };

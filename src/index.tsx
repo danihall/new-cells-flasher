@@ -40,8 +40,12 @@ const router = createBrowserRouter([
             cells: current_state.cellsState.cells,
           } as IArt;
 
-          addInArtStorage(new_art);
-          return null;
+          const process = await addInArtStorage(new_art);
+
+          if (process.ok) {
+            return null;
+          }
+          return process.text;
         },
         element: (
           <Suspense>

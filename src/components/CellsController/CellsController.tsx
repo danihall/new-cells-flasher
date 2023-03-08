@@ -1,10 +1,4 @@
-import {
-  useState,
-  useCallback,
-  MouseEvent,
-  PointerEvent,
-  CSSProperties,
-} from "react";
+import { useState, useCallback, CSSProperties } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 
 import { TCells } from "../../custom_types/cells";
