@@ -1,0 +1,12 @@
+.paragraph {
+    &.margin-top {
+        margin-top: calc(var(--margin-top) / 2);
+    }
+
+    &.first-letter {
+        &::first-letter {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.title {
+    &-text {
+        position: relative;
+
+        &::after {
+            display: block;
+            content: "";
+            width: 100%;
+            height: max(6px, 30% );
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--title-accent);
+
+        }
+    }
+}
