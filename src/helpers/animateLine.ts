@@ -10,7 +10,7 @@ const template = (chunks: TemplateStringsArray, rest: number): string =>
 const createDelayString = (index: number): string =>
   template`animation-delay: ${index}ms`;
 
-const animate = (
+const animateLine = (
   index: number,
   middle_line_index: number,
   lines_vertical: Array<HTMLDivElement>,
@@ -40,4 +40,4 @@ const animate = (
   restartAnimation(line_bottom);
 };
 
-export { animate };
+export { animateLine };

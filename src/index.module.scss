@@ -2,8 +2,9 @@
   --main-color: rgb(167, 167, 167);
   --margin-top: 1.5rem;
   --padding-button: 6px;
-  --padding-toast: calc(var(--padding-button) * 2);
-  --countdown-time: 5s;
+  --countdown-time: 1s;
+  --toast-success-accent: rgb(0, 255, 98);
+  --toast-error-accent: rgb(240, 85, 23);
 }
 
 html {

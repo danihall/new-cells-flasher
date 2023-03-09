@@ -4,7 +4,7 @@ import { IArt, IArtToDelete, TStoredArts } from "../custom_types/stored-arts";
 
 export interface IProcess {
   ok: boolean;
-  text?: string;
+  text: string;
 }
 
 let storage = localStorage.getItem(STORAGE_NAME);
@@ -34,8 +34,9 @@ const registerArtStorage = () => {
 const addInArtStorage = (new_art: IArt): Promise<IProcess> => {
   return new Promise<IProcess>((resolve, reject) => {
     if (art_storage && art_storage.find((art) => art.name === new_art.name)) {
-      reject(`There is already an art named ${new_art.name}`);
+      return reject(`There is already an art named ${new_art.name}`);
     }
+
     art_storage.push(new_art);
     registerArtStorage();
     resolve({ ok: true, text: `${new_art.name} wa successfully registered.` });

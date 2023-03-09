@@ -24,4 +24,14 @@ const forceAnimationEnd = (element: TElement) => {
   animation?.finish();
 };
 
-export { restartAnimation, pauseAnimation, forceAnimationEnd };
+const reverseAnimation = (element: TElement) => {
+  const animation = _getAnimation(element);
+  animation?.reverse();
+};
+
+export {
+  restartAnimation,
+  pauseAnimation,
+  forceAnimationEnd,
+  reverseAnimation,
+};

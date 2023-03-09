@@ -2,14 +2,5 @@ const MIN_CELLS_PER_ROW = 3;
 const MAX_CELLS_PER_ROW = 60;
 const STORAGE_NAME = "cells_flasher_registered_arts";
 const LAST_ART_NAME = "cells_flasher_last_art";
-const TOAST_TEXTS = {
-  success: "Your Art has been successfully registered.",
-};
 
-export {
-  MIN_CELLS_PER_ROW,
-  MAX_CELLS_PER_ROW,
-  STORAGE_NAME,
-  LAST_ART_NAME,
-  TOAST_TEXTS,
-};
+export { MIN_CELLS_PER_ROW, MAX_CELLS_PER_ROW, STORAGE_NAME, LAST_ART_NAME };

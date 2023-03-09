@@ -1,15 +1,29 @@
 .toast {
     position: fixed;
-    padding: var(--padding-toast);
-    bottom: var(--margin-top);
+    padding: calc(var(--padding-button) * 2);
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
+    border: 6px solid;
 
     &.success {
-        background-color: green;
+        border-color: var(--toast-success-accent);
     }
 
     &.error {
-        background-color: red;
+        border-color: var(--toast-error-accent);
+    }
+
+    &.animate {
+        animation: slideUp .4s ease-in-out forwards;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate3d(-50%, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, calc(-100% - var(--margin-top)), 0);
     }
 }

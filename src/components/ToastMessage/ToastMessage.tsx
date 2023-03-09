@@ -1,27 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { TOAST_TEXTS } from "../../constants";
+import { restartAnimation } from "../../helpers/animationHelpers";
 
 import css from "./ToastMessage.module.scss";
 
 interface IToastMessageProps {
   type: "error" | "success";
-  text?: string;
+  text: string;
 }
 
-const ToastMessage = ({
-  type,
-  text = TOAST_TEXTS.success,
-}: IToastMessageProps): JSX.Element => {
-  const className = `${css.toast} ${css[type]}`;
+const ToastMessage = ({ type, text }: IToastMessageProps): JSX.Element => {
+  const [inline_style, setStyle] = useState({ animationDirection: "normal" });
+  const className = `${css.toast} ${css[type]} ${css.animate}`;
+  const toast = useRef<HTMLDivElement>(null);
+  const pause = useRef(0);
 
-  /*
+  const handleAnimationEnd = () => {
+    toast.current?.removeEventListener("animationend", handleAnimationEnd);
+
+    pause.current = window.setTimeout(() => {
+      setStyle({ animationDirection: "reverse" });
+      restartAnimation(toast.current);
+    }, 1000);
+  };
+
   useEffect(() => {
+    window.clearTimeout(pause.current);
+    setStyle({ animationDirection: "normal" });
+    toast.current?.addEventListener("animationend", handleAnimationEnd);
+    restartAnimation(toast.current);
 
-  }, []);
-  */
+    return () => {
+      window.clearTimeout(pause.current);
+      toast.current?.removeEventListener("animationend", handleAnimationEnd);
+    };
+  }, [text]);
 
-  return <div className={className}>{text}</div>;
+  return (
+    <div style={inline_style} ref={toast} className={className}>
+      {text}
+    </div>
+  );
 };
 
 export default ToastMessage;
