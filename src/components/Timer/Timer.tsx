@@ -1,18 +1,18 @@
 import { useRef, useEffect } from "react";
-import { useSelector, useDispatch, useStore } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useSubmit } from "react-router-dom";
 
+import { LAST_ART_NAME } from "../../constants";
 import {
   restartAnimation,
   pauseAnimation,
 } from "../../helpers/animationHelpers";
-import { saveLastArt } from "../../helpers/artStorage";
 import {
   selectCountdown,
   setCountdownReached,
 } from "../../store/features/countdownIsReached";
 import { selectLinesAreDrawn } from "../../store/features/linesAreDrawn";
 import { selectNewRoundInProgress } from "../../store/features/newRoundInProgress";
-import { RootState } from "../../store/store";
 
 import css from "./Timer.module.scss";
 
@@ -21,15 +21,17 @@ const Timer = (): JSX.Element => {
   const new_round_in_progress = useSelector(selectNewRoundInProgress);
   const countdown_is_reached = useSelector(selectCountdown);
 
-  const store = useStore();
   const dispatch = useDispatch();
+  const submit = useSubmit();
 
   const circle = useRef<SVGCircleElement>(null);
   const className = css.svg + (lines_are_drawn ? "" : ` ${css.hidden}`);
 
   const handleAnimationEnd = () => {
-    const cells = (store.getState() as RootState).cellsState.cells;
-    saveLastArt(cells);
+    const form_data = new FormData();
+    form_data.append(LAST_ART_NAME, "");
+
+    submit(form_data, { method: "post" });
     dispatch(setCountdownReached(true));
   };
 
@@ -37,12 +39,13 @@ const Timer = (): JSX.Element => {
     pauseAnimation(circle.current);
 
     if (lines_are_drawn) {
-      circle.current?.addEventListener("animationend", handleAnimationEnd, {
-        once: true,
-      });
+      circle.current?.addEventListener("animationend", handleAnimationEnd);
       dispatch(setCountdownReached(false));
       restartAnimation(circle.current);
     }
+
+    return () =>
+      circle.current?.removeEventListener("animationend", handleAnimationEnd);
   }, [new_round_in_progress, lines_are_drawn]);
 
   return countdown_is_reached ? (

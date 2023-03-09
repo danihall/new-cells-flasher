@@ -49,7 +49,7 @@ const saveLastArt = (last_art: TCells): IProcess => {
     return { ok: false, text: reason as string };
   }
 
-  return { ok: true };
+  return { ok: true, text: "Art state saved in memory" };
 };
 
 const deleteArt = ({ entry_name }: IArtToDelete): Promise<IProcess> => {

@@ -59,8 +59,7 @@ const Lines = ({
 
       lines_vertical.current[0].addEventListener(
         "animationend",
-        handleAnimationEnd,
-        { once: true }
+        handleAnimationEnd
       );
 
       for (let i = 0; i <= middle_line; i++) {
@@ -75,6 +74,15 @@ const Lines = ({
 
     lines_vertical.current.length = 0;
     lines_horizontal.current.length = 0;
+
+    return () => {
+      if (lines_vertical.current?.length) {
+        lines_vertical.current[0].removeEventListener(
+          "animationend",
+          handleAnimationEnd
+        );
+      }
+    };
   }, [cells_per_row]);
 
   return (

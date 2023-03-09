@@ -56,9 +56,7 @@ const ArtRegisterer = (): JSX.Element => {
             <Button type="button" onClick={() => dialog_form.current?.close()}>
               Cancel
             </Button>
-            <Button type="submit" formMethod="dialog">
-              Validate Art
-            </Button>
+            <Button type="submit">Validate Art</Button>
           </div>
         </form>
       </dialog>

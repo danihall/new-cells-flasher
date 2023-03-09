@@ -5,12 +5,14 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
+import { LAST_ART_NAME } from "./constants";
 import { IArt } from "./custom_types/stored-arts";
 import {
   addInArtStorage,
   getStoredArts,
   getLastArt,
   deleteArt,
+  saveLastArt,
 } from "./helpers/artStorage";
 import Home from "./pages/home";
 import store, { RootState } from "./store/store";
@@ -32,12 +34,17 @@ const router = createBrowserRouter([
         path: "new-art",
         action: async ({ request }) => {
           const data = await request.formData();
-          const current_state = store.getState() as RootState;
+          const data_to_register = Object.fromEntries(data);
+          const cells = (store.getState() as RootState).cellsState.cells;
+
+          if (LAST_ART_NAME in data_to_register) {
+            return saveLastArt(cells);
+          }
 
           const new_art = {
-            ...Object.fromEntries(data),
+            ...data_to_register,
             date: new Date().toLocaleDateString(),
-            cells: current_state.cellsState.cells,
+            cells,
           } as IArt;
 
           return await addInArtStorage(new_art);
