@@ -30,7 +30,10 @@ const NewArt = () => {
         </div>
       </ArtFooterLayout>
       {art_added ? (
-        <ToastMessage type={art_added.ok ? "success" : "error"} />
+        <ToastMessage
+          type={art_added.ok ? "success" : "error"}
+          text={art_added.text}
+        />
       ) : null}
     </>
   );

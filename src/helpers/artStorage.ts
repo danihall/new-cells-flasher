@@ -39,10 +39,8 @@ const addInArtStorage = (new_art: IArt): Promise<IProcess> => {
     art_storage.push(new_art);
     registerArtStorage();
     resolve({ ok: true, text: `${new_art.name} wa successfully registered.` });
-  }).catch((reason) => ({ ok: false, text: reason }));
+  }).catch((reason) => ({ ok: false, text: reason.toString() }));
 };
-
-const getStoredArts = () => art_storage;
 
 const saveLastArt = (last_art: TCells): IProcess => {
   try {
@@ -54,23 +52,25 @@ const saveLastArt = (last_art: TCells): IProcess => {
   return { ok: true };
 };
 
+const deleteArt = ({ entry_name }: IArtToDelete): Promise<IProcess> => {
+  return new Promise<IProcess>((resolve) => {
+    const art_to_delete_index = art_storage.findIndex(
+      (art) => art.name === entry_name
+    );
+
+    art_storage.splice(art_to_delete_index, 1);
+    registerArtStorage();
+    resolve({ ok: true, text: `${entry_name} was deleted.` });
+  }).catch((reason) => ({ ok: false, text: reason.toString() }));
+};
+
+const getStoredArts = () => art_storage;
 const getLastArt = (): TCells | null => {
   const last_saved_art = localStorage.getItem(LAST_ART_NAME);
   if (last_saved_art) {
     return JSON.parse(last_saved_art);
   }
   return null;
-};
-
-const deleteArt = ({ entry_name }: IArtToDelete) => {
-  const art_to_delete_index = art_storage.findIndex(
-    (art) => art.name === entry_name
-  );
-
-  art_storage.splice(art_to_delete_index, 1);
-  registerArtStorage();
-
-  return art_storage;
 };
 
 export {

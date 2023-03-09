@@ -1,7 +1,8 @@
 import { FormEvent } from "react";
-import { useSubmit } from "react-router-dom";
+import { useActionData, useSubmit } from "react-router-dom";
 
 import { TStoredArts } from "../../custom_types/stored-arts";
+import { IProcess } from "../../helpers/artStorage";
 import {
   formatDate,
   readable_format,
@@ -11,6 +12,7 @@ import ArtMainLayout from "../ArtMainLayout/ArtMainLayout";
 import Button from "../Button/Button";
 import { Cells } from "../CellsController/CellsController";
 import Lines from "../Lines/Lines";
+import ToastMessage from "../ToastMessage/ToastMessage";
 
 import css from "./RegisteredArts.module.scss";
 
@@ -19,7 +21,10 @@ const RegisteredArts = ({
 }: {
   storedArts: TStoredArts;
 }): JSX.Element => {
+  const art_deleted: IProcess = useActionData() as IProcess;
+
   const submit = useSubmit();
+
   const deleteArt = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     submit(event.currentTarget);
@@ -47,7 +52,7 @@ const RegisteredArts = ({
             <form onSubmit={deleteArt} method="delete">
               {/**
                * Cannot use button value when submitting form because of event.preventDefault().
-               * So a <input type="hidden"> is used.
+               * So a <input type="hidden"> is used. A single <input type="submit"> could have been used instead but oh well.
                */}
               <input type="hidden" name="entry_name" value={name} />
               <Button type="submit" name={name}>
@@ -57,6 +62,12 @@ const RegisteredArts = ({
           </div>
         );
       })}
+      {art_deleted ? (
+        <ToastMessage
+          type={art_deleted.ok ? "success" : "error"}
+          text={art_deleted.text}
+        />
+      ) : null}
     </>
   );
 };

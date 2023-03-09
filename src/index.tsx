@@ -40,12 +40,7 @@ const router = createBrowserRouter([
             cells: current_state.cellsState.cells,
           } as IArt;
 
-          const process = await addInArtStorage(new_art);
-
-          if (process.ok) {
-            return null;
-          }
-          return process.text;
+          return await addInArtStorage(new_art);
         },
         element: (
           <Suspense>
@@ -66,8 +61,7 @@ const router = createBrowserRouter([
         path: "/previous-arts",
         action: async ({ request }) => {
           const data = await request.formData();
-          deleteArt(Object.fromEntries(data));
-          return null;
+          return await deleteArt(Object.fromEntries(data));
         },
         loader: getStoredArts,
         element: (
