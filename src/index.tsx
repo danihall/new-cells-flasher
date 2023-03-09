@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import { LAST_ART_NAME } from "./constants";
+import { COUNTDOWN_TIME, LAST_ART_NAME } from "./constants";
 import { IArt } from "./custom_types/stored-arts";
 import {
   addInArtStorage,
@@ -90,7 +90,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root") as HTMLElement).render(
+const root = document.getElementById("root") as HTMLElement;
+
+root.style.cssText = `--countdown-time: ${COUNTDOWN_TIME}ms`;
+
+createRoot(root).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
