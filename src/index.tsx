@@ -21,6 +21,24 @@ const NewArt = lazy(() => import("./pages/NewArt"));
 const LastArt = lazy(() => import("./pages/LastArt"));
 const PreviousArts = lazy(() => import("./pages/PreviousArts"));
 
+const actionRegisterArt = async ({ request }: { request: Request }) => {
+  const data = await request.formData();
+  const data_to_register = Object.fromEntries(data);
+  const cells = (store.getState() as RootState).cellsState.cells;
+
+  if (LAST_ART_NAME in data_to_register) {
+    return saveLastArt(cells);
+  }
+
+  const new_art = {
+    ...data_to_register,
+    date: new Date().toLocaleDateString(),
+    cells,
+  } as IArt;
+
+  return await addInArtStorage(new_art);
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,23 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "new-art",
-        action: async ({ request }) => {
-          const data = await request.formData();
-          const data_to_register = Object.fromEntries(data);
-          const cells = (store.getState() as RootState).cellsState.cells;
-
-          if (LAST_ART_NAME in data_to_register) {
-            return saveLastArt(cells);
-          }
-
-          const new_art = {
-            ...data_to_register,
-            date: new Date().toLocaleDateString(),
-            cells,
-          } as IArt;
-
-          return await addInArtStorage(new_art);
-        },
+        action: actionRegisterArt,
         element: (
           <Suspense>
             <NewArt />
@@ -58,6 +60,7 @@ const router = createBrowserRouter([
       {
         path: "/last-art",
         loader: getLastArt,
+        action: actionRegisterArt,
         element: (
           <Suspense>
             <LastArt />

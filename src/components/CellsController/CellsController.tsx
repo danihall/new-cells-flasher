@@ -17,6 +17,7 @@ import css from "./CellsController.module.scss";
 interface ICellsProps {
   cellsPerRow: number;
   forceCellsArray?: TCells | null;
+  isPlayable?: boolean;
 }
 
 type TWinningMoves = Array<number>;
@@ -36,6 +37,7 @@ const CellsController = (): JSX.Element => {
 const Cells = ({
   cellsPerRow,
   forceCellsArray = null,
+  isPlayable = true,
 }: ICellsProps): JSX.Element => {
   const store = useStore();
   const [cells, setCells] = useState<TCells>(
@@ -48,7 +50,7 @@ const Cells = ({
       : []
   );
   const [can_draw, setCanDraw] = useState(false);
-  const should_add_events = !forceCellsArray;
+  const should_add_events = isPlayable;
 
   const dispatch = useDispatch();
 

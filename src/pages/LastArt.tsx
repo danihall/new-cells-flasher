@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useActionData } from "react-router-dom";
 
 import ArtFooterLayout from "../components/ArtFooterLayout/ArtFooterLayout";
 import ArtMainLayout from "../components/ArtMainLayout/ArtMainLayout";
@@ -9,14 +9,16 @@ import ButtonReset from "../components/ButtonReset/ButtonReset";
 import { Cells } from "../components/CellsController/CellsController";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
+import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { TCells } from "../custom_types/cells";
-import { art_storage_is_available } from "../helpers/artStorage";
+import { art_storage_is_available, IProcess } from "../helpers/artStorage";
 import { setCountdownReached } from "../store/features/countdownIsReached";
 import { drawingIsDone } from "../store/features/linesAreDrawn";
 import { setNewRoundInProgress } from "../store/features/newRoundInProgress";
 
 const LastArt = (): JSX.Element => {
   const last_art: TCells | null = useLoaderData() as TCells | null;
+  const art_added: IProcess = useActionData() as IProcess;
 
   if (last_art) {
     const dispatch = useDispatch();
@@ -42,6 +44,12 @@ const LastArt = (): JSX.Element => {
             {art_storage_is_available ? <ArtRegisterer /> : null}
           </div>
         </ArtFooterLayout>
+        {art_added ? (
+          <ToastMessage
+            type={art_added.ok ? "success" : "error"}
+            text={art_added.text}
+          />
+        ) : null}
       </>
     );
   }
