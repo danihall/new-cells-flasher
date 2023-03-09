@@ -45,7 +45,11 @@ const RegisteredArts = ({
             {description ? <p>{description}</p> : null}
 
             <ArtMainLayout>
-              <Cells cellsPerRow={cells_per_row} forceCellsArray={cells} />
+              <Cells
+                cellsPerRow={cells_per_row}
+                forceCellsArray={cells}
+                isPlayable={false}
+              />
               <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
             </ArtMainLayout>
 
