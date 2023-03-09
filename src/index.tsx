@@ -17,11 +17,15 @@ import {
 import Home from "./pages/home";
 import store, { RootState } from "./store/store";
 
+interface IRequest {
+  request: Request;
+}
+
 const NewArt = lazy(() => import("./pages/NewArt"));
 const LastArt = lazy(() => import("./pages/LastArt"));
 const PreviousArts = lazy(() => import("./pages/PreviousArts"));
 
-const actionRegisterArt = async ({ request }: { request: Request }) => {
+const actionRegisterArt = async ({ request }: IRequest) => {
   const data = await request.formData();
   const data_to_register = Object.fromEntries(data);
   const cells = (store.getState() as RootState).cellsState.cells;
@@ -37,6 +41,11 @@ const actionRegisterArt = async ({ request }: { request: Request }) => {
   } as IArt;
 
   return await addInArtStorage(new_art);
+};
+
+const actionDeleteArt = async ({ request }: IRequest) => {
+  const data = await request.formData();
+  return await deleteArt(Object.fromEntries(data));
 };
 
 const router = createBrowserRouter([
@@ -69,10 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/previous-arts",
-        action: async ({ request }) => {
-          const data = await request.formData();
-          return await deleteArt(Object.fromEntries(data));
-        },
+        action: actionDeleteArt,
         loader: getStoredArts,
         element: (
           <Suspense>

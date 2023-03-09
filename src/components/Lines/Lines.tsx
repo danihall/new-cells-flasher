@@ -1,7 +1,7 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { animate } from "../../helpers/animate";
+import { animateLine } from "../../helpers/animateLine";
 import { selectCellsPerRow } from "../../store/features/cellsState";
 import { drawingIsDone } from "../../store/features/linesAreDrawn";
 
@@ -43,8 +43,14 @@ const Lines = ({
     []
   );
 
-  const handleAnimationEnd = () => {
+  const handleAnimationCancel = (event: any) => {
+    event.target.removeEventListener("animationcancel", handleAnimationEnd);
+    event.target.removeEventListener("animationend", handleAnimationEnd);
+  };
+
+  const handleAnimationEnd = (event: any) => {
     dispatch(drawingIsDone(true));
+    event.target.removeEventListener("animationend", handleAnimationEnd);
   };
 
   useEffect(() => {
@@ -58,12 +64,17 @@ const Lines = ({
       dispatch(drawingIsDone(false));
 
       lines_vertical.current[0].addEventListener(
+        "animationcancel",
+        handleAnimationCancel
+      );
+
+      lines_vertical.current[0].addEventListener(
         "animationend",
         handleAnimationEnd
       );
 
       for (let i = 0; i <= middle_line; i++) {
-        animate(
+        animateLine(
           i,
           middle_line,
           lines_vertical.current,
