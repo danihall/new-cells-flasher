@@ -36,7 +36,7 @@ const actionRegisterArt = async ({ request }: IRequest) => {
 
   const new_art = {
     ...data_to_register,
-    date: new Date().toLocaleDateString(),
+    date: new Date().toString(),
     cells,
   } as IArt;
 

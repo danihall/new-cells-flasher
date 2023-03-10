@@ -1,15 +1,15 @@
-.h1 {
+.h2 {
     &-text {
         position: relative;
 
         &::after {
             display: block;
             content: "";
-            width: 80%;
-            height: max(6px, 30%);
+            width: 60%;
+            height: max(4px, 30%);
             position: absolute;
             bottom: 0;
-            left: 10%;
+            left: 20%;
             z-index: -1;
             background-color: var(--title-accent);
         }

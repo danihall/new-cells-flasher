@@ -3,17 +3,14 @@ import { useActionData, useSubmit } from "react-router-dom";
 
 import { TStoredArts } from "../../custom_types/stored-arts";
 import { IProcess } from "../../helpers/artStorage";
-import {
-  formatDate,
-  readable_format,
-  datetime_format,
-} from "../../helpers/formatDate";
 import rootCss from "../../index.module.scss";
 import ArtMainLayout from "../ArtMainLayout/ArtMainLayout";
 import Button from "../Button/Button";
 import { Cells } from "../CellsController/CellsController";
-import Lines from "../Lines/Lines";
+import DateTime from "../DateTime/DateTime";
+import Paragraph from "../Paragraph/Paragraph";
 import Separator from "../Separator/Separator";
+import Subtitle from "../Subtitle/Subtitle";
 import ToastMessage from "../ToastMessage/ToastMessage";
 
 import css from "./RegisteredArts.module.scss";
@@ -41,11 +38,11 @@ const RegisteredArts = ({
         return (
           <div className={className} key={name}>
             {index > 0 ? <Separator /> : null}
-            <h2>{name}</h2>
-            <time dateTime={formatDate(date, datetime_format)}>
-              {formatDate(date, readable_format)}
-            </time>
-            {description ? <p>{description}</p> : null}
+            <div className={css.header}>
+              <Subtitle>{name}</Subtitle>
+              <DateTime date={date} />
+            </div>
+            {description ? <Paragraph>{description}</Paragraph> : null}
 
             <ArtMainLayout>
               <Cells
@@ -53,10 +50,13 @@ const RegisteredArts = ({
                 forceCellsArray={cells}
                 isPlayable={false}
               />
-              <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
             </ArtMainLayout>
 
-            <form onSubmit={deleteArt} method="delete">
+            <form
+              className={rootCss["margin-top"]}
+              onSubmit={deleteArt}
+              method="delete"
+            >
               {/**
                * Cannot use button value when submitting form because of event.preventDefault().
                * So a <input type="hidden"> is used. A single <input type="submit"> could have been used instead but oh well.
