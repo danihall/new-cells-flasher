@@ -8,10 +8,12 @@ import {
   readable_format,
   datetime_format,
 } from "../../helpers/formatDate";
+import rootCss from "../../index.module.scss";
 import ArtMainLayout from "../ArtMainLayout/ArtMainLayout";
 import Button from "../Button/Button";
 import { Cells } from "../CellsController/CellsController";
 import Lines from "../Lines/Lines";
+import Separator from "../Separator/Separator";
 import ToastMessage from "../ToastMessage/ToastMessage";
 
 import css from "./RegisteredArts.module.scss";
@@ -22,7 +24,7 @@ const RegisteredArts = ({
   storedArts: TStoredArts;
 }): JSX.Element => {
   const art_deleted: IProcess = useActionData() as IProcess;
-
+  const className = [css["stored-art"], rootCss["margin-top"]].join(" ");
   const submit = useSubmit();
 
   const deleteArt = (event: FormEvent<HTMLFormElement>) => {
@@ -32,12 +34,13 @@ const RegisteredArts = ({
 
   return (
     <>
-      {storedArts.map((art) => {
+      {storedArts.map((art, index) => {
         const { name, cells, date, description } = art;
         const cells_per_row = Math.sqrt(cells.length);
 
         return (
-          <div className={css["stored-art"]} key={name}>
+          <div className={className} key={name}>
+            {index > 0 ? <Separator /> : null}
             <h2>{name}</h2>
             <time dateTime={formatDate(date, datetime_format)}>
               {formatDate(date, readable_format)}

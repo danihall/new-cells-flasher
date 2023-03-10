@@ -7,6 +7,9 @@
   &>nav {
     position: sticky;
     top: 0;
+    background-color: white;
+    z-index: 1;
+    padding-bottom: var(--gap);
 
     &>ul {
       display: flex;

@@ -40,6 +40,7 @@ const LastArt = (): JSX.Element => {
         </ArtMainLayout>
 
         <ArtFooterLayout>
+          <div></div>
           <Timer />
           <div>
             <ButtonReset resetAllCells={false} />

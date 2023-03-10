@@ -7,7 +7,7 @@ interface ITitleProps {
 
 const Title = ({ children }: ITitleProps): JSX.Element => {
   return (
-    <h1 className={`${css.title} ${utilsCSS["margin-top"]}`}>
+    <h1 className={utilsCSS["margin-top"]}>
       <span className={css["title-text"]}>{children}</span>
     </h1>
   );
