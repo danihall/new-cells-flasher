@@ -13,6 +13,7 @@ import {
 } from "../../store/features/countdownIsReached";
 import { selectLinesAreDrawn } from "../../store/features/linesAreDrawn";
 import { selectNewRoundInProgress } from "../../store/features/newRoundInProgress";
+import Paragraph from "../Paragraph/Paragraph";
 
 import css from "./Timer.module.scss";
 
@@ -49,9 +50,9 @@ const Timer = (): JSX.Element => {
   }, [new_round_in_progress, lines_are_drawn]);
 
   return countdown_is_reached ? (
-    <p>
+    <Paragraph>
       You're out of time! Hit the "Reset" button or select another grid size.
-    </p>
+    </Paragraph>
   ) : (
     <svg
       className={className}

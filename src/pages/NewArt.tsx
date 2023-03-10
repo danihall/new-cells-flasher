@@ -18,6 +18,7 @@ const NewArt = () => {
   return (
     <>
       <Title>New Art</Title>
+
       <ArtMainLayout>
         <CellsController />
         <Lines />
@@ -31,6 +32,7 @@ const NewArt = () => {
           {art_storage_is_available ? <ArtsRegisterer /> : null}
         </div>
       </ArtFooterLayout>
+
       {art_added ? (
         <ToastMessage
           type={art_added.ok ? "success" : "error"}

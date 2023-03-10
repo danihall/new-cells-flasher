@@ -1,6 +1,7 @@
 :root {
   --main-color: rgb(167, 167, 167);
   --title-accent: rgb(190, 184, 167);
+  --gap: 20px;
   --margin-top: 1.5rem;
   --padding-button: 6px;
   --countdown-time: 1s;
@@ -30,7 +31,7 @@ ul {
   padding: 0;
 }
 
-p {
+h1, h2, p {
   margin: 0;
   padding: 0;
 }

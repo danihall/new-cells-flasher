@@ -4,7 +4,16 @@
 
   &>nav>ul {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    gap: var(--gap);
+
+    & a:link,
+    & a:visited {
+      color: inherit;
+      text-decoration-color: var(--main-color);
+    }
+
+    & a:hover {
+      text-decoration-color: inherit;
+    }
   }
 }

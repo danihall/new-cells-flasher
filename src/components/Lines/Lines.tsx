@@ -73,6 +73,7 @@ const Lines = ({
         handleAnimationEnd
       );
 
+      /** Restart animations */
       for (let i = 0; i <= middle_line; i++) {
         animateLine(
           i,

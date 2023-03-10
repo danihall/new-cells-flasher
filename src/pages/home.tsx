@@ -11,11 +11,12 @@ const Home = () => {
       <Paragraph>The goal of the game? There is none!</Paragraph>
       <Paragraph>
         This is just an "app" that you can use to draw flashing pixel art. You
-        can click, or draw, and the grid you chose will fill itself with
-        alternate-colored cells.
+        can click, or while your pointer is pressed, draw. The grid you chose
+        will fill itself with alternate-colored cells.
       </Paragraph>
       <Paragraph>
-        For extra fun, triplets of neighbor cells will flash in unisson.
+        For extra fun, triplets of neighbor cells will flash in unisson. Same
+        rules of a tic-tac-toe game.
       </Paragraph>
       <Paragraph>
         For even more fun, a countdown is set between each move you make, so
