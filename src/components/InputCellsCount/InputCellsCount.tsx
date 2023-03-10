@@ -51,7 +51,10 @@ const InputCellsCount = (): JSX.Element => {
         onChange={handleChange}
         onPointerUp={handlePointerUp}
       />
-      <label htmlFor="cells_per_row">cells per row: {value}</label>
+      <label htmlFor="cells_per_row">
+        <span>cells per row:</span>
+        <span>{value}</span>
+      </label>
     </div>
   );
 };

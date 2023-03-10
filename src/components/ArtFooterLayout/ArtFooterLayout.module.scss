@@ -3,4 +3,11 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     gap: var(--gap);
+
+    &>div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: calc(var(--gap) / 2);
+    }
 }

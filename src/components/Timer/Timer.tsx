@@ -7,20 +7,15 @@ import {
   restartAnimation,
   pauseAnimation,
 } from "../../helpers/animationHelpers";
-import {
-  selectCountdown,
-  setCountdownReached,
-} from "../../store/features/countdownIsReached";
+import { setCountdownReached } from "../../store/features/countdownIsReached";
 import { selectLinesAreDrawn } from "../../store/features/linesAreDrawn";
 import { selectNewRoundInProgress } from "../../store/features/newRoundInProgress";
-import Paragraph from "../Paragraph/Paragraph";
 
 import css from "./Timer.module.scss";
 
 const Timer = (): JSX.Element => {
   const lines_are_drawn = useSelector(selectLinesAreDrawn);
   const new_round_in_progress = useSelector(selectNewRoundInProgress);
-  const countdown_is_reached = useSelector(selectCountdown);
 
   const dispatch = useDispatch();
   const submit = useSubmit();
@@ -49,11 +44,7 @@ const Timer = (): JSX.Element => {
       circle.current?.removeEventListener("animationend", handleAnimationEnd);
   }, [new_round_in_progress, lines_are_drawn]);
 
-  return countdown_is_reached ? (
-    <Paragraph>
-      You're out of time! Hit the "Reset" button or select another grid size.
-    </Paragraph>
-  ) : (
+  return (
     <svg
       className={className}
       width="60px"

@@ -1,19 +1,26 @@
 .app {
   max-width: 600px;
+  height: 100vh;
   margin: 0 auto;
+  padding-inline: var(--gap);
 
-  &>nav>ul {
-    display: flex;
-    gap: var(--gap);
+  &>nav {
+    position: sticky;
+    top: 0;
 
-    & a:link,
-    & a:visited {
-      color: inherit;
-      text-decoration-color: var(--main-color);
-    }
+    &>ul {
+      display: flex;
+      gap: var(--gap);
 
-    & a:hover {
-      text-decoration-color: inherit;
+      & a:link,
+      & a:visited {
+        color: inherit;
+        text-decoration-color: var(--main-color);
+      }
+
+      & a:hover {
+        text-decoration-color: inherit;
+      }
     }
   }
 }

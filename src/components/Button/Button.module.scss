@@ -1,7 +1,24 @@
 .button {
-    border: 4px solid var(--main-color);
+    border-radius: var(--gap);
+    border: 2px solid var(--main-color);
     appearance: none;
     -webkit-appearance: none;
     background-color: white;
     padding: var(--padding-button);
+    cursor: pointer;
+    font-size: inherit;
+
+    &:disabled {
+        border-color: transparent;
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled) {
+        box-shadow: 4px 7px 9px 0px rgba(0, 0, 0, 0.5);
+
+        &:hover {
+            border-color: var(--input-accent);
+            box-shadow: 4px 7px 9px 0px var(--input-accent);
+        }
+    }
 }
