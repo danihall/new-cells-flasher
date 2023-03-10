@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSubmit } from "react-router-dom";
 
+import rootCss from "../../index.module.scss";
 import { selectCountdown } from "../../store/features/countdownIsReached";
 import Button from "../Button/Button";
 
@@ -36,28 +37,30 @@ const ArtRegisterer = (): JSX.Element => {
       <dialog className={css.dialog} id="dialog-form" ref={dialog_form}>
         <form method="post" onSubmit={registerArt}>
           <div>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="type any name for this pixel art"
+                value={value}
+                onChange={handleChange}
+              />
+            </div>
 
-            <label htmlFor="name">Name:</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              placeholder="type any name for this pixel art"
-              value={value}
-              onChange={handleChange}
-            />
-
-            <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              name="description"
-              placeholder="type an optional description"
-            />
-
+            <div className={rootCss["margin-top"]}>
+              <label htmlFor="description">Description:</label>
+              <textarea
+                id="description"
+                name="description"
+                placeholder="type an optional description"
+              />
+            </div>
           </div>
 
-          <div>
+          <div className={rootCss["margin-top"]}>
             <Button type="button" onClick={() => dialog_form.current?.close()}>
               Cancel
             </Button>

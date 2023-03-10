@@ -1,5 +1,5 @@
 .app {
-  max-width: 600px;
+  max-width: var(--game-width);
   height: 100vh;
   margin: 0 auto;
   padding-inline: var(--gap);

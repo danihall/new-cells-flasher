@@ -1,5 +1,19 @@
 .dialog {
-    & > form {
+    width: calc(var(--game-width) - (var(--gap) * 4));
 
+    &>form {
+        & label {
+            display: block;
+        }
+
+        & input,
+        & textarea {
+            width: 100%;
+        }
+
+        & textarea {
+            height: 10rem;
+            resize: none;
+        }
     }
 }
