@@ -3,4 +3,10 @@
         display: flex;
         justify-content: flex-end;
     }
+
+    & .header {
+        display: flex;
+        align-items: baseline;
+        gap: var(--gap);
+    }
 }
