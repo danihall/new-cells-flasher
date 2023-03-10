@@ -1,6 +1,13 @@
 .game-footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: var(--gap);
 
-    gap: 20px;
+    &>div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: calc(var(--gap) / 2);
+    }
 }

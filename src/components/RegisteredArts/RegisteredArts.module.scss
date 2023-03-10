@@ -1,3 +1,6 @@
 .stored-art {
-    border: 1px solid orange;
+    & form {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

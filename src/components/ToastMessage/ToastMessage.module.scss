@@ -5,6 +5,8 @@
     left: 50%;
     transform: translate3d(-50%, 0, 0);
     border: 6px solid;
+    background-color: white;
+    animation: slideUp 2.2s ease-in-out forwards;
 
     &.success {
         border-color: var(--toast-success-accent);
@@ -13,17 +15,19 @@
     &.error {
         border-color: var(--toast-error-accent);
     }
-
-    &.animate {
-        animation: slideUp .4s ease-in-out forwards;
-    }
 }
 
 @keyframes slideUp {
-    from {
+    0% {
         transform: translate3d(-50%, 0, 0);
     }
-    to {
+    20% {
         transform: translate3d(-50%, calc(-100% - var(--margin-top)), 0);
+    }
+    90% {
+        transform: translate3d(-50%, calc(-100% - var(--margin-top)), 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
     }
 }

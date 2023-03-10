@@ -1,0 +1,67 @@
+/* @see https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/ */
+.input-range {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    //accent-color: var(--input-accent);
+    cursor: pointer;
+
+    /* Must separate selector because when a browser doesn't understand a selector, it drops the group entirely */
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: calc(var(--gap) * 1.3);
+        height: calc(var(--gap) * 1.3);
+        border-radius: 50%;
+        background-color: var(--input-accent);
+        border: none;
+        box-shadow: -3px 5px 5px 0px rgba(0, 0, 0, 0.5);
+        margin-top: calc(calc(var(--gap) * 1.3) / 2 * -1);
+    }
+
+    &::-moz-range-thumb {
+        width: calc(var(--gap) * 1.3);
+        height: calc(var(--gap) * 1.3);
+        border-radius: 50%;
+        background-color: var(--input-accent);
+        border: none;
+        box-shadow: -3px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    &:hover::-webkit-slider-thumb {
+        box-shadow: -3px 5px 5px 0px var(--input-accent);
+    }
+    &:hover::-moz-range-thumb {
+        box-shadow: -3px 5px 5px 0px var(--input-accent);
+    }
+
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        background-color: lightgray;
+    }
+
+    &::-moz-range-track {
+        width: 100%;
+        height: 4px;
+        background-color: lightgray;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &+label {
+        display: flex;
+        margin-top: calc(var(--margin-top) / 2);
+
+        &>span {
+            &:first-child {
+                opacity: .6;
+            }
+
+            &:last-child {
+                margin-left: 5px;
+            }
+        }
+    }
+}

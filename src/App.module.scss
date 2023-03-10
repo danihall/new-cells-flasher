@@ -1,10 +1,29 @@
 .app {
-  max-width: 600px;
+  max-width: var(--game-width);
+  height: 100vh;
   margin: 0 auto;
+  padding-inline: var(--gap);
 
-  &>nav>ul {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  &>nav {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    padding-bottom: var(--gap);
+
+    &>ul {
+      display: flex;
+      gap: var(--gap);
+
+      & a:link,
+      & a:visited {
+        color: inherit;
+        text-decoration-color: var(--main-color);
+      }
+
+      & a:hover {
+        text-decoration-color: inherit;
+      }
+    }
   }
 }

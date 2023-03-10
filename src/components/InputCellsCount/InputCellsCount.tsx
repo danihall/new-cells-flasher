@@ -9,6 +9,8 @@ import {
 import { setCountdownReached } from "../../store/features/countdownIsReached";
 import { RootState } from "../../store/store";
 
+import css from "./InputCellsCount.module.scss";
+
 const InputCellsCount = (): JSX.Element => {
   const current_cells_per_row = useSelector(selectCellsPerRow);
   const [value, setValue] = useState(`${current_cells_per_row}`);
@@ -38,6 +40,7 @@ const InputCellsCount = (): JSX.Element => {
   return (
     <div>
       <input
+        className={css["input-range"]}
         id="cells_per_row"
         type="range"
         name="cells_per_row"
@@ -48,7 +51,10 @@ const InputCellsCount = (): JSX.Element => {
         onChange={handleChange}
         onPointerUp={handlePointerUp}
       />
-      <label htmlFor="cells_per_row">cells per row: {value}</label>
+      <label htmlFor="cells_per_row">
+        <span>cells per row:</span>
+        <span>{value}</span>
+      </label>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 .svg {
     display: block;
+    place-self: center;
 
     &>circle {
         stroke: var(--main-color);

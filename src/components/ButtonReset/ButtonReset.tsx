@@ -5,6 +5,7 @@ import {
   setCountdownReached,
   selectCountdown,
 } from "../../store/features/countdownIsReached";
+import { setNewRoundInProgress } from "../../store/features/newRoundInProgress";
 import { resetCellsKey } from "../../store/features/resetCells";
 import Button from "../Button/Button";
 
@@ -14,6 +15,8 @@ const ButtonReset = ({ resetAllCells = true }): JSX.Element => {
 
   const handleClick = useCallback(() => {
     dispatch(setCountdownReached(false));
+    dispatch(setNewRoundInProgress());
+
     if (resetAllCells) {
       dispatch(resetCellsKey());
     }
@@ -21,7 +24,7 @@ const ButtonReset = ({ resetAllCells = true }): JSX.Element => {
 
   return (
     <Button disabled={!countdown_is_reached} onClick={handleClick}>
-      reset
+      Reset
     </Button>
   );
 };

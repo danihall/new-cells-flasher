@@ -9,6 +9,7 @@ import ButtonReset from "../components/ButtonReset/ButtonReset";
 import { Cells } from "../components/CellsController/CellsController";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
+import Title from "../components/Title/Title";
 import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { TCells } from "../custom_types/cells";
 import { art_storage_is_available, IProcess } from "../helpers/artStorage";
@@ -32,12 +33,14 @@ const LastArt = (): JSX.Element => {
 
     return (
       <>
+        <Title>Last Art</Title>
         <ArtMainLayout>
           <Cells cellsPerRow={cells_per_row} forceCellsArray={last_art} />
           <Lines shouldAnimate={false} forceCellsPerRow={cells_per_row} />
         </ArtMainLayout>
 
         <ArtFooterLayout>
+          <div></div>
           <Timer />
           <div>
             <ButtonReset resetAllCells={false} />

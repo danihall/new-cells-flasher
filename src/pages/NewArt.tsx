@@ -8,6 +8,7 @@ import CellsController from "../components/CellsController/CellsController";
 import InputCellsCount from "../components/InputCellsCount/InputCellsCount";
 import Lines from "../components/Lines/Lines";
 import Timer from "../components/Timer/Timer";
+import Title from "../components/Title/Title";
 import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { IProcess, art_storage_is_available } from "../helpers/artStorage";
 
@@ -16,6 +17,8 @@ const NewArt = () => {
 
   return (
     <>
+      <Title>New Art</Title>
+
       <ArtMainLayout>
         <CellsController />
         <Lines />
@@ -29,6 +32,7 @@ const NewArt = () => {
           {art_storage_is_available ? <ArtsRegisterer /> : null}
         </div>
       </ArtFooterLayout>
+
       {art_added ? (
         <ToastMessage
           type={art_added.ok ? "success" : "error"}
