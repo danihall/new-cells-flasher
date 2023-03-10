@@ -5,6 +5,8 @@ import { useSubmit } from "react-router-dom";
 import { selectCountdown } from "../../store/features/countdownIsReached";
 import Button from "../Button/Button";
 
+import css from "./ArtRegisterer.module.scss";
+
 const ArtRegisterer = (): JSX.Element => {
   const countdown_is_reached = useSelector(selectCountdown);
   const [value, setValue] = useState("");
@@ -31,9 +33,10 @@ const ArtRegisterer = (): JSX.Element => {
         Register Art
       </Button>
 
-      <dialog id="dialog-form" ref={dialog_form}>
+      <dialog className={css.dialog} id="dialog-form" ref={dialog_form}>
         <form method="post" onSubmit={registerArt}>
           <div>
+
             <label htmlFor="name">Name:</label>
             <input
               id="name"
@@ -44,12 +47,14 @@ const ArtRegisterer = (): JSX.Element => {
               value={value}
               onChange={handleChange}
             />
+
             <label htmlFor="description">Description:</label>
             <textarea
               id="description"
               name="description"
               placeholder="type an optional description"
             />
+
           </div>
 
           <div>
