@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/new-cells-flasher/static/css/main.307e4d88.css",
-    "main.js": "/new-cells-flasher/static/js/main.9716c609.js",
+    "main.js": "/new-cells-flasher/static/js/main.7bcb98ac.js",
     "static/css/669.2bfb9920.chunk.css": "/new-cells-flasher/static/css/669.2bfb9920.chunk.css",
     "static/js/669.c8dacd14.chunk.js": "/new-cells-flasher/static/js/669.c8dacd14.chunk.js",
     "static/css/233.e932c68d.chunk.css": "/new-cells-flasher/static/css/233.e932c68d.chunk.css",
@@ -11,7 +11,7 @@
     "static/js/631.7fc09e69.chunk.js": "/new-cells-flasher/static/js/631.7fc09e69.chunk.js",
     "index.html": "/new-cells-flasher/index.html",
     "main.307e4d88.css.map": "/new-cells-flasher/static/css/main.307e4d88.css.map",
-    "main.9716c609.js.map": "/new-cells-flasher/static/js/main.9716c609.js.map",
+    "main.7bcb98ac.js.map": "/new-cells-flasher/static/js/main.7bcb98ac.js.map",
     "669.2bfb9920.chunk.css.map": "/new-cells-flasher/static/css/669.2bfb9920.chunk.css.map",
     "669.c8dacd14.chunk.js.map": "/new-cells-flasher/static/js/669.c8dacd14.chunk.js.map",
     "233.e932c68d.chunk.css.map": "/new-cells-flasher/static/css/233.e932c68d.chunk.css.map",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.307e4d88.css",
-    "static/js/main.9716c609.js"
+    "static/js/main.7bcb98ac.js"
   ]
 }
