@@ -8,7 +8,7 @@ function App() {
       <nav>
         <ul>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="new-cells-flasher">Home</NavLink>
           </li>
           <li>
             <NavLink to="new-art">New Art</NavLink>
