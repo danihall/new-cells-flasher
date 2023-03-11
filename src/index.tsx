@@ -50,11 +50,11 @@ const actionDeleteArt = async ({ request }: IRequest) => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/new-cells-flasher",
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/new-cells-flasher",
         element: <Home />,
       },
       {
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/last-art",
+        path: "last-art",
         loader: getLastArt,
         action: actionRegisterArt,
         element: (
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/previous-arts",
+        path: "previous-arts",
         action: actionDeleteArt,
         loader: getStoredArts,
         element: (
