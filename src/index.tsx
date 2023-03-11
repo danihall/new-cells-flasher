@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/new-cells-flasher",
+        path: "",
         element: <Home />,
       },
       {
