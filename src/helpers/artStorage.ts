@@ -34,12 +34,19 @@ const registerArtStorage = () => {
 const addInArtStorage = (new_art: IArt): Promise<IProcess> => {
   return new Promise<IProcess>((resolve, reject) => {
     if (art_storage && art_storage.find((art) => art.name === new_art.name)) {
-      return reject(`There is already an art named ${new_art.name}`);
+      return reject(`There is already an art named "${new_art.name}"!`);
+    }
+
+    if (new_art.cells.every((cell) => !cell)) {
+      return reject(`Every cells in "${new_art.name}" are empty!`);
     }
 
     art_storage.push(new_art);
     registerArtStorage();
-    resolve({ ok: true, text: `${new_art.name} wa successfully registered.` });
+    resolve({
+      ok: true,
+      text: `"${new_art.name}" wa successfully registered.`,
+    });
   }).catch((reason) => ({ ok: false, text: reason.toString() }));
 };
 
@@ -50,7 +57,7 @@ const saveLastArt = (last_art: TCells): IProcess => {
     return { ok: false, text: reason as string };
   }
 
-  return { ok: true, text: "Art state saved in memory" };
+  return { ok: true, text: "Art state saved in memory." };
 };
 
 const deleteArt = ({ entry_name }: IArtToDelete): Promise<IProcess> => {
@@ -61,7 +68,7 @@ const deleteArt = ({ entry_name }: IArtToDelete): Promise<IProcess> => {
 
     art_storage.splice(art_to_delete_index, 1);
     registerArtStorage();
-    resolve({ ok: true, text: `${entry_name} was deleted.` });
+    resolve({ ok: true, text: `"${entry_name}" was deleted.` });
   }).catch((reason) => ({ ok: false, text: reason.toString() }));
 };
 
