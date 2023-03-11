@@ -1,17 +1,12 @@
 .h1 {
-    &-text {
-        position: relative;
+    font-size: 3rem;
+    display: inline-block;
+    position: relative;
+    background-image: repeating-linear-gradient(to bottom, var(--cell-yellow) 0 4px, var(--cell-purple) 4px 8px), repeating-linear-gradient(to right, transparent 0 4px, var(--cell-purple) 4px 8px);
+    background-blend-mode: color;
 
-        &::after {
-            display: block;
-            content: "";
-            width: 80%;
-            height: max(6px, 30%);
-            position: absolute;
-            bottom: 0;
-            left: 10%;
-            z-index: -1;
-            background-color: var(--title-accent);
-        }
+    &-text {
+        background-color: white;
+        mix-blend-mode: screen;
     }
 }

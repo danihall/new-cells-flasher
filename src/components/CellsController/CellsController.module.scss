@@ -8,11 +8,11 @@
     user-select: none;
 
     &.player-x {
-      background-color: rgb(255, 215, 15);
+      background-color: var(--cell-yellow);
     }
 
     &.player-o {
-      background-color: rgb(94, 74, 223);
+      background-color: var(--cell-purple);
     }
 
     &.is--winner-move {
