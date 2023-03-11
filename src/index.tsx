@@ -14,7 +14,8 @@ import {
   deleteArt,
   saveLastArt,
 } from "./helpers/artStorage";
-import Home from "./pages/home";
+import Error404 from "./pages/Error404";
+import Home from "./pages/Home";
 import store, { RootState } from "./store/store";
 
 interface IRequest {
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
   {
     path: "/new-cells-flasher",
     element: <App />,
+    errorElement: <Error404 />,
     children: [
       {
         path: "",
