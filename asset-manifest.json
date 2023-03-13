@@ -1,27 +1,25 @@
 {
   "files": {
-    "main.css": "/new-cells-flasher/static/css/main.6142004b.css",
-    "main.js": "/new-cells-flasher/static/js/main.c324b5d6.js",
-    "static/css/669.af06b9d1.chunk.css": "/new-cells-flasher/static/css/669.af06b9d1.chunk.css",
-    "static/js/669.c8dacd14.chunk.js": "/new-cells-flasher/static/js/669.c8dacd14.chunk.js",
-    "static/css/233.aed8f2e9.chunk.css": "/new-cells-flasher/static/css/233.aed8f2e9.chunk.css",
-    "static/js/233.0c93b4a4.chunk.js": "/new-cells-flasher/static/js/233.0c93b4a4.chunk.js",
-    "static/css/927.77b68eeb.chunk.css": "/new-cells-flasher/static/css/927.77b68eeb.chunk.css",
-    "static/js/927.de037566.chunk.js": "/new-cells-flasher/static/js/927.de037566.chunk.js",
-    "static/js/631.b159a10d.chunk.js": "/new-cells-flasher/static/js/631.b159a10d.chunk.js",
+    "main.css": "/new-cells-flasher/static/css/main.a541edd4.css",
+    "main.js": "/new-cells-flasher/static/js/main.fcbe1d91.js",
+    "static/css/484.b75599a7.chunk.css": "/new-cells-flasher/static/css/484.b75599a7.chunk.css",
+    "static/js/484.81455d61.chunk.js": "/new-cells-flasher/static/js/484.81455d61.chunk.js",
+    "static/css/877.40a24a17.chunk.css": "/new-cells-flasher/static/css/877.40a24a17.chunk.css",
+    "static/js/877.aa28f77e.chunk.js": "/new-cells-flasher/static/js/877.aa28f77e.chunk.js",
+    "static/css/927.76de8601.chunk.css": "/new-cells-flasher/static/css/927.76de8601.chunk.css",
+    "static/js/927.a2d3c9ae.chunk.js": "/new-cells-flasher/static/js/927.a2d3c9ae.chunk.js",
     "index.html": "/new-cells-flasher/index.html",
-    "main.6142004b.css.map": "/new-cells-flasher/static/css/main.6142004b.css.map",
-    "main.c324b5d6.js.map": "/new-cells-flasher/static/js/main.c324b5d6.js.map",
-    "669.af06b9d1.chunk.css.map": "/new-cells-flasher/static/css/669.af06b9d1.chunk.css.map",
-    "669.c8dacd14.chunk.js.map": "/new-cells-flasher/static/js/669.c8dacd14.chunk.js.map",
-    "233.aed8f2e9.chunk.css.map": "/new-cells-flasher/static/css/233.aed8f2e9.chunk.css.map",
-    "233.0c93b4a4.chunk.js.map": "/new-cells-flasher/static/js/233.0c93b4a4.chunk.js.map",
-    "927.77b68eeb.chunk.css.map": "/new-cells-flasher/static/css/927.77b68eeb.chunk.css.map",
-    "927.de037566.chunk.js.map": "/new-cells-flasher/static/js/927.de037566.chunk.js.map",
-    "631.b159a10d.chunk.js.map": "/new-cells-flasher/static/js/631.b159a10d.chunk.js.map"
+    "main.a541edd4.css.map": "/new-cells-flasher/static/css/main.a541edd4.css.map",
+    "main.fcbe1d91.js.map": "/new-cells-flasher/static/js/main.fcbe1d91.js.map",
+    "484.b75599a7.chunk.css.map": "/new-cells-flasher/static/css/484.b75599a7.chunk.css.map",
+    "484.81455d61.chunk.js.map": "/new-cells-flasher/static/js/484.81455d61.chunk.js.map",
+    "877.40a24a17.chunk.css.map": "/new-cells-flasher/static/css/877.40a24a17.chunk.css.map",
+    "877.aa28f77e.chunk.js.map": "/new-cells-flasher/static/js/877.aa28f77e.chunk.js.map",
+    "927.76de8601.chunk.css.map": "/new-cells-flasher/static/css/927.76de8601.chunk.css.map",
+    "927.a2d3c9ae.chunk.js.map": "/new-cells-flasher/static/js/927.a2d3c9ae.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6142004b.css",
-    "static/js/main.c324b5d6.js"
+    "static/css/main.a541edd4.css",
+    "static/js/main.fcbe1d91.js"
   ]
 }
