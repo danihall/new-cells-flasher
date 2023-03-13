@@ -13,5 +13,5 @@ it("renders cells", () => {
   );
 
   const cells = container.firstElementChild?.children;
-  expect(cells.length).toEqual(9);
+  expect(cells?.length).toEqual(9);
 });
