@@ -50,7 +50,6 @@ const Cells = ({
       : []
   );
   const [can_draw, setCanDraw] = useState(false);
-  const should_add_events = isPlayable;
 
   const dispatch = useDispatch();
 
@@ -63,7 +62,6 @@ const Cells = ({
         return;
       }
 
-      //const index = Number((event.target as HTMLElement).dataset.key);
       const new_cells = [...cells];
       new_cells[index] = is_player_x ? "x" : "o";
       const new_result = computeResult(new_cells, cellsPerRow);
@@ -100,7 +98,7 @@ const Cells = ({
       {...{
         style: inline_style,
         className: css.cells,
-        ...(should_add_events && {
+        ...(isPlayable && {
           onPointerDown: () => setCanDraw(true),
           onPointerUp: () => setCanDraw(false),
           onPointerLeave: () => setCanDraw(false),
@@ -113,7 +111,7 @@ const Cells = ({
             {...{
               className: setClassName(winning_moves, cell, index),
               key: index.toString(),
-              ...(should_add_events && {
+              ...(isPlayable && {
                 onPointerMove: can_draw ? handlePointerEvent(index) : undefined,
                 onClick: handlePointerEvent(index),
               }),
